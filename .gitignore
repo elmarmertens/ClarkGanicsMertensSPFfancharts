@@ -5,8 +5,6 @@
 !*.m
 !*.txt
 !*.tex
-listing*tex
-old.tex
 !*.csv
 !*.xls
 !*.xlsx
@@ -27,13 +25,7 @@ old.tex
 !/matlabtoolbox/em*/
 /kensington*/local*.m
 !/kensingtonToolbox/
-kensingtonTablesAndFigures/finishwrap.m
-/kensingtonMCMC/finishwrap.m
-/kensingtonET/CRPS_eval0.m
-/kensingtonTablesAndFigures/prctileWeighted0.m
-/kensingtonTablesAndFigures/prctileWeighted1.m
 ~*
 
-kensingtonTablesAndFigures/OLDtabulateRelativeEvalstatsET.m
-/kensingtonET/wprctile0.m
-/kensingtonDataUSSPF/lagmatrix.m
+
+todo.md
