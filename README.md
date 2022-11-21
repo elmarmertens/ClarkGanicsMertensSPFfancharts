@@ -2,8 +2,6 @@
 
 WORK IN PROGRESS 
 
-please come back by Nov 28 2022
-
 ## “Constructing Fan Charts from the Ragged Edge of SPF Forecasts“ and “What Is the Predictive Value of SPF Point and Density Forecasts?“
 
 This readme file describes the set of replication files (“the replication set“) for two papers:
