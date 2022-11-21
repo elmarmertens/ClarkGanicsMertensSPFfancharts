@@ -1,8 +1,6 @@
-# REPLICATION FILES
+# REPLICATION FILES for “Constructing Fan Charts from the Ragged Edge of SPF Forecasts“ and “What Is the Predictive Value of SPF Point and Density Forecasts?“ by Clark, Ganics, and Mertens
 
-WORK IN PROGRESS 
-
-## “Constructing Fan Charts from the Ragged Edge of SPF Forecasts“ and “What Is the Predictive Value of SPF Point and Density Forecasts?“
+# WORK IN PROGRESS
 
 This readme file describes the set of replication files (“the replication set“) for two papers:
 
