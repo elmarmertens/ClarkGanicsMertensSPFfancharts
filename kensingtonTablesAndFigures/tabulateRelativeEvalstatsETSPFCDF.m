@@ -50,14 +50,15 @@ end
     
 %% define set of models to compare
 
-model_offset = 7;
+model_offset = 8;
 
-PAIRS = {[1 2] [1 3] [2 3] ...  % CGM ET: bins or bins and means
-    [1 4] [1 5] [1 6] [1 7] ...
-    [2 4] [2 5] [2 6] [2 7] ... % bins only       vs. CDF
-    [3 4] [3 5] [3 6] [3 7] ... % bins and means  vs. CDF
-    [4 5] [6 7] ...             % does adding variance help?
-    [4 6] [5 7] ...             % is Normal or Generalized Beta better?
+PAIRS = {[1 2] [1 3] [2 3] ...            % CGM ET: bins or bins and means
+    [1 4] [1 5] [1 6] [1 7] [1 8] ...
+    [2 4] [2 5] [2 6] [2 7] [2 8] ...     % bins only       vs. CDF
+    [3 4] [3 5] [3 6] [3 7] [3 8] ...     % bins and means  vs. CDF
+    [4 5] [6 7] ...                       % does adding variance help?
+    [4 6] [5 7] ...                       % is Normal or Generalized Beta better?
+    [5 8] [7 8] ...                       % does adding skewness explicitly improve N or GB?  
     };
 PAIRS_length_start = length(PAIRS);
 for idx = PAIRS_length_start + 1 : 2 * PAIRS_length_start
@@ -71,47 +72,61 @@ m = 0;
 thisType   = 'STATEtrendgapSV';
 thisPretty = 'Trend plus gapSV';
 
+% 1
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'none';
 
+% 2
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'binsOnly';
 
+% 3
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'binsAndMeans';
 
+% 4
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'NMeansOnly';
 
+% 5
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'NMeansAndVars';
 
+% 6
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'GBMeansOnly';
 
+% 7
 m = m + 1;
 models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'GBMeansAndVars';
+
+% 8
+m = m + 1;
+models(m).type    = thisType;
+models(m).pretty  = thisPretty;
+models(m).Ndraws  = 3e3;
+models(m).ETlabel = 'GBMeansVarsAndSkew';
 
 thisType   = 'STATEconst';
 thisPretty = 'CONST';
@@ -157,6 +172,12 @@ models(m).type    = thisType;
 models(m).pretty  = thisPretty;
 models(m).Ndraws  = 3e3;
 models(m).ETlabel = 'GBMeansAndVars';
+
+m = m + 1;
+models(m).type    = thisType;
+models(m).pretty  = thisPretty;
+models(m).Ndraws  = 3e3;
+models(m).ETlabel = 'GBMeansVarsAndSkew';
 
 % thisType   = 'STATEscaleSV';
 % thisPretty = 'scale SV';
@@ -294,6 +315,8 @@ for pp = 1 : length(PAIRS)
             modelpretty0 = sprintf('ET (gen. beta means) with %s', models(m0).pretty);
         case 'GBMeansAndVars'
             modelpretty0 = sprintf('ET (gen. beta means and variances) with %s', models(m0).pretty);
+        case 'GBMeansVarsAndSkew'
+            modelpretty0 = sprintf('ET (gen. beta means, variances and skewness) with %s', models(m0).pretty);
         otherwise
             error('ETlabel <<%s>> not recognized', ETlabel0)
     end
@@ -312,6 +335,8 @@ for pp = 1 : length(PAIRS)
             modelpretty1 = sprintf('ET (gen. beta means) with %s', models(m1).pretty);
         case 'GBMeansAndVars'
             modelpretty1 = sprintf('ET (gen. beta means and variances) with %s', models(m1).pretty);
+        case 'GBMeansVarsAndSkew'
+            modelpretty1 = sprintf('ET (gen. beta means, variances and skewness) with %s', models(m1).pretty);
         otherwise
             error('ETlabel <<%s>> not recognized', ETlabel1)
     end
@@ -353,7 +378,7 @@ for pp = 1 : length(PAIRS)
                     isET0 = false;
                     matfilename = sprintf('slimCGMmcmc-%s-Ndraws%d', modellabel0, Ndraws0);
                     mat0 = matfile(fullfile(resultdir, matfilename));
-                case {'binsOnly', 'binsAndMeans', 'NMeansOnly', 'NMeansAndVars', 'GBMeansOnly', 'GBMeansAndVars'}
+                case {'binsOnly', 'binsAndMeans', 'NMeansOnly', 'NMeansAndVars', 'GBMeansOnly', 'GBMeansAndVars','GBMeansVarsAndSkew'}
                     isET0 = true;
                     matfilename = sprintf('kensington-EVAL-ET%s-Ndraws%d-%s.mat', ETlabel0, Ndraws0, modellabel0);
                     mat0 = matfile(fullfile(ETresultdir, matfilename));
@@ -368,7 +393,7 @@ for pp = 1 : length(PAIRS)
                     isET1 = false;
                     matfilename = sprintf('slimCGMmcmc-%s-Ndraws%d', modellabel1, Ndraws1);
                     mat1 = matfile(fullfile(resultdir, matfilename));
-                case {'binsOnly', 'binsAndMeans', 'NMeansOnly', 'NMeansAndVars', 'GBMeansOnly', 'GBMeansAndVars'}
+                case {'binsOnly', 'binsAndMeans', 'NMeansOnly', 'NMeansAndVars', 'GBMeansOnly', 'GBMeansAndVars','GBMeansVarsAndSkew'}
                     isET1 = true;
                     matfilename = sprintf('kensington-EVAL-ET%s-Ndraws%d-%s.mat', ETlabel1, Ndraws1, modellabel1);
                     mat1 = matfile(fullfile(ETresultdir, matfilename));
@@ -595,16 +620,16 @@ for pp = 1 : length(PAIRS)
         deltaTstat1 = relRMSEtstat;
         % TODO: are the following lines still needed ?
         % weed out "significant" relRMSE of 1.00
-        % ndx              = round(deltaloss1, 2) == 1;
-        % deltaTstat1(ndx) = 0;
+         ndx              = round(deltaloss1, 2) == 1;
+         deltaTstat1(ndx) = 0;
 
         statname2   = 'CRPS';
         deltaloss2  = CRPS1 ./ CRPS0;
         deltaTstat2 = relCRPStstat;
         % TODO: are the following lines still needed ?
         % weed out "significant" relCRPS of 1.00
-        % ndx              = round(deltaloss2, 2) == 1;
-        % deltaTstat2(ndx) = 0;
+         ndx              = round(deltaloss2, 2) == 1;
+         deltaTstat2(ndx) = 0;
 
         if doCharts
             tabname    = sprintf('slidetables%s-%sand%s-%s-vs-%s-%s.tex', datatype, statname1, statname2, ...

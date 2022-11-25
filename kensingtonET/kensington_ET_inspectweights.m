@@ -12,8 +12,12 @@ addpath ../matlabtoolbox/emeconometrics/
 addpath ../matlabtoolbox/emstatespace/
 
 %% settings
-models            = {'STATEtrendgapSV', 'STATEtrendgapSVnoise2',  'STATEscaleSV', 'STATEconst'};
+models            = {'STATEtrendgapSV', 'STATEconst'}; %'STATEtrendgapSVnoise2',  'STATEscaleSV',
 DATALABELS        = {'RGDP', 'PGDP', 'UNRATE'};
+ET_types = {'binsOnly', 'binsAndMeans',...
+            'NMeansOnly', 'NMeansAndVars',...   % normal means only, normal means and variances
+            'GBMeansOnly', 'GBMeansAndVars',... % generalized beta means only, generalized beta means and variances
+            'GBMeansVarsAndSkew'};              % generalized beta means, variances and skewness
 
 mcmc_results_folder = localresultsMCMC;
 MCMCdraws           = 3e3;
@@ -39,28 +43,24 @@ initwrap
 
 %% allocate memory
 T      = 215; % note: hardcoded 
-RELESS = NaN(T, 2, length(models), length(DATALABELS));
-ESS    = NaN(T, 2, length(models), length(DATALABELS));
-omega_x= NaN(2, 2, T, length(models), length(DATALABELS));
-KLIC   = NaN(T, 2, length(models), length(DATALABELS));
-zero_weight_all = NaN(T, 2, length(models), length(DATALABELS));
-large_weight_counter_all = NaN(T, 2, length(models), length(DATALABELS));
-large_weight_sum_all = NaN(T, 2, length(models), length(DATALABELS));
-small_weight_counter_all = NaN(T, 2, length(models), length(DATALABELS));
+RELESS = NaN(T, length(ET_types), length(models), length(DATALABELS));
+ESS    = NaN(T, length(ET_types), length(models), length(DATALABELS));
+omega_x= NaN(2, length(ET_types), T, length(models), length(DATALABELS));
+KLIC   = NaN(T, length(ET_types),length(models), length(DATALABELS));
+zero_weight_all = NaN(T, length(ET_types), length(models), length(DATALABELS));
+large_weight_counter_all = NaN(T, length(ET_types), length(models), length(DATALABELS));
+large_weight_sum_all = NaN(T, length(ET_types), length(models), length(DATALABELS));
+small_weight_counter_all = NaN(T, length(ET_types), length(models), length(DATALABELS));
 
 ESS_threshold           = 1000; % threshold for ESS, "arbitrary"
 large_weight_threshold  = 0.01; % threshold for "large" weights, "arbitrary"
 
 %% loop over ET modes
-for doBinsOnly = [true, false]
+ndxET   = 0;
+for thisET = 1 : length(ET_types)
 
-    if doBinsOnly
-        ETlabel = 'binsOnly';
-        ndxET   = 1;
-    else
-        ETlabel = 'binsAndMeans';
-        ndxET   = 2;
-    end
+        ETlabel = ET_types{thisET};
+        ndxET   = ndxET + 1; % we don't need to display all results, increasing the counter by 1 allows for that
 
     %% start loop over models
     for m = 1 : length(models)
@@ -218,37 +218,47 @@ max_large_weight_sum_all = max(large_weight_sum_all,[],'all');
 
 
 %% plot comparison across ET modes
-ETlabel = {'binsOnly', 'binsAndMeans'};
+PAIRS = {[1 7]};
+%{'binsOnly', 'binsAndMeans'};
+
 for thisD = 1 : length(DATALABELS)
     datalabel = DATALABELS{thisD};
+
     for m = 1 : length(models)
-        
         modellabel  = models{m};
 
         theseRELESS = RELESS(:,:,m,thisD);
         theseESS    = ESS(:,:,m,thisD);
         firstT      = find(any(~isnan(theseRELESS), 2), 1, 'first');
         ETdates     = dates(firstT:end);
+        theseomega_x = omega_x(:,:,:,m,thisD);
+
+        for thisPAIRS = 1 : length(PAIRS)
+
+            pairs1_tmp = PAIRS{thisPAIRS}(1);
+            pairs2_tmp = PAIRS{thisPAIRS}(2);
+
+            ETlabel = ET_types(PAIRS{thisPAIRS});
 
         % relative ESS
         thisfig     = figure;
         hold on
-        plot(ETdates, theseRELESS(firstT:end,1), '-', 'linewidth', 2);
-        plot(ETdates, theseRELESS(firstT:end,2), '-.', 'linewidth', 3);
+        plot(ETdates, theseRELESS(firstT:end,pairs1_tmp), '-', 'linewidth', 2);
+        plot(ETdates, theseRELESS(firstT:end,pairs2_tmp), '-.', 'linewidth', 3);
         legend(ETlabel)
         ylim([0 1])
         xtickdates(ETdates)
         title(sprintf('%s \n(%s)', datalabel, modellabel))
-        wrapthisfigure(thisfig, sprintf('RELESS-%s-%s', datalabel, modellabel), wrap);
+        wrapthisfigure(thisfig, sprintf('RELESS-%s-%s-%s', datalabel, modellabel,cell2mat(ETlabel)), wrap);
         
         % ESS
         thisfig     = figure;
         hold on
-        plot(ETdates, theseESS(firstT:end,1), '-', 'linewidth', 2);
-        plot(ETdates, theseESS(firstT:end,2), '-.', 'linewidth', 3);
+        plot(ETdates, theseESS(firstT:end,pairs1_tmp), '-', 'linewidth', 2);
+        plot(ETdates, theseESS(firstT:end,pairs2_tmp), '-.', 'linewidth', 3);
         %yline(ESS_threshold,':k');
-        small_ESS_1 = theseESS(firstT:end,1)<ESS_threshold;
-        small_ESS_2 = theseESS(firstT:end,2)<ESS_threshold;
+        small_ESS_1 = theseESS(firstT:end,pairs1_tmp)<ESS_threshold;
+        small_ESS_2 = theseESS(firstT:end,pairs2_tmp)<ESS_threshold;
         if any(small_ESS_1 ~= 0)
             xline(ETdates(small_ESS_1), '-', 'linewidth', 2);
         end
@@ -258,23 +268,23 @@ for thisD = 1 : length(DATALABELS)
         legend(ETlabel)
         xtickdates(ETdates)
         title(sprintf('%s \n(%s)', datalabel, modellabel))
-        wrapthisfigure(thisfig, sprintf('ESS-%s-%s', datalabel, modellabel), wrap);
+        wrapthisfigure(thisfig, sprintf('ESS-%s-%s-%s', datalabel, modellabel, cell2mat(ETlabel)), wrap);
 
         % omega
-        theseomega_x = omega_x(:,:,:,m,thisD);
+        
 
         for twist_x_idx = 1 : length(twist_x_vec)
 
             thisfig     = figure;
             hold on
-            plot(ETdates, squeeze(theseomega_x(twist_x_idx,1,firstT:end)), '-', 'linewidth', 2);
-            plot(ETdates, squeeze(theseomega_x(twist_x_idx,2,firstT:end)), ':', 'linewidth', 2);
+            plot(ETdates, squeeze(theseomega_x(twist_x_idx,pairs1_tmp,firstT:end)), '-', 'linewidth', 2);
+            plot(ETdates, squeeze(theseomega_x(twist_x_idx,pairs2_tmp,firstT:end)), ':', 'linewidth', 2);
             %legend({strcat(ETlabel{1},' \omega_{',num2str(twist_x_vec(twist_x_idx)),'}'),...
             %        strcat(ETlabel{2},' \omega_{',num2str(twist_x_vec(twist_x_idx)),'}')})
             legend(ETlabel)
             xtickdates(ETdates)
             title(sprintf('%s \n(%s) \\omega_{%d}', datalabel, modellabel,twist_x_vec(twist_x_idx)))
-            wrapthisfigure(thisfig, sprintf('Omega-%d-%s-%s', twist_x_vec(twist_x_idx), datalabel, modellabel), wrap);
+            wrapthisfigure(thisfig, sprintf('Omega-%d-%s-%s-%s', twist_x_vec(twist_x_idx), datalabel, modellabel, cell2mat(ETlabel)), wrap);
 
         end
 
@@ -284,43 +294,44 @@ for thisD = 1 : length(DATALABELS)
         sgtitle(sprintf('%s \n(%s)', datalabel, modellabel))
         subplot(1,2,1)
         hold on
-        plot(ETdates, large_weight_counter_all(firstT:end,1,m,thisD), '-s', 'linewidth', 1);
-        plot(ETdates, large_weight_counter_all(firstT:end,2,m,thisD), '-.s', 'linewidth', 1.5);
+        plot(ETdates, large_weight_counter_all(firstT:end,pairs1_tmp,m,thisD), '-s', 'linewidth', 1);
+        plot(ETdates, large_weight_counter_all(firstT:end,pairs2_tmp,m,thisD), '-.s', 'linewidth', 1.5);
         xtickdates(ETdates)
         title('# of large weights');
         hold off
         subplot(1,2,2)
         hold on
-        plot(ETdates, large_weight_sum_all(firstT:end,1,m,thisD), '-d', 'linewidth', 1);
-        plot(ETdates, large_weight_sum_all(firstT:end,2,m,thisD), '-.d', 'linewidth', 1.5);
+        plot(ETdates, large_weight_sum_all(firstT:end,pairs1_tmp,m,thisD), '-d', 'linewidth', 1);
+        plot(ETdates, large_weight_sum_all(firstT:end,pairs2_tmp,m,thisD), '-.d', 'linewidth', 1.5);
         title('sum of large weights');
         hold off
         legend(ETlabel)
         ylim([0 0.2])
         xtickdates(ETdates)
-        wrapthisfigure(thisfig, sprintf('largeweight-%s-%s', datalabel, modellabel), wrap);
+        wrapthisfigure(thisfig, sprintf('largeweight-%s-%s-%s', datalabel, modellabel, cell2mat(ETlabel)), wrap);
 
         % zero weights
         thisfig     = figure;
         hold on
         title(sprintf('%s \n(%s)', datalabel, modellabel))
-        plot(ETdates, zero_weight_all(firstT:end,1,m,thisD), '-s', 'linewidth', 1);
-        plot(ETdates, zero_weight_all(firstT:end,2,m,thisD), '-.s', 'linewidth', 1.5);
+        plot(ETdates, zero_weight_all(firstT:end,pairs1_tmp,m,thisD), '-s', 'linewidth', 1);
+        plot(ETdates, zero_weight_all(firstT:end,pairs2_tmp,m,thisD), '-.s', 'linewidth', 1.5);
         xtickdates(ETdates)
         legend(ETlabel)
-        wrapthisfigure(thisfig, sprintf('zeroweight-%s-%s', datalabel, modellabel), wrap);
+        wrapthisfigure(thisfig, sprintf('zeroweight-%s-%s-%s', datalabel, modellabel, cell2mat(ETlabel)), wrap);
 
         % small weights
         thisfig     = figure;
         hold on
         title(sprintf('%s \n(%s)', datalabel, modellabel))
-        plot(ETdates, small_weight_counter_all(firstT:end,1,m,thisD), '-s', 'linewidth', 1);
-        plot(ETdates, small_weight_counter_all(firstT:end,2,m,thisD), '-.s', 'linewidth', 1.5);
+        plot(ETdates, small_weight_counter_all(firstT:end,pairs1_tmp,m,thisD), '-s', 'linewidth', 1);
+        plot(ETdates, small_weight_counter_all(firstT:end,pairs2_tmp,m,thisD), '-.s', 'linewidth', 1.5);
         xtickdates(ETdates)
         legend(ETlabel)
-        wrapthisfigure(thisfig, sprintf('smallweight-%s-%s', datalabel, modellabel), wrap);
+        wrapthisfigure(thisfig, sprintf('smallweight-%s-%s-%s', datalabel, modellabel, cell2mat(ETlabel)), wrap);
 
 
+        end
     end
 end
 

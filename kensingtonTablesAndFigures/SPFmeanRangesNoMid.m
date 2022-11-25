@@ -126,7 +126,7 @@ for d = 1 % : 2 % length(DATALABELS)
         thisfig = figure;
         hold on
         set(gca, 'FontSize', fontsize)
-        hMid = plot(dates, meanMid(:,hz), '--', 'Color',  Colors4Plots(7), 'LineWidth', 2);
+        % hMid = plot(dates, meanMid(:,hz), '--', 'Color',  Colors4Plots(7), 'LineWidth', 2);
         hRange = plot(dates, meanLB(:,hz), '-', 'Color',  Colors4Plots(7), 'LineWidth', 2);
         plot(dates, meanUB(:,hz), '-', 'Color',  Colors4Plots(7), 'LineWidth', 2);
 
@@ -138,7 +138,7 @@ for d = 1 % : 2 % length(DATALABELS)
             plot(dates(ndx), SPFpoint(ndx), 's', 'Color',  Colors4Plots(1), 'LineWidth', 3, 'MarkerSize', 10);
         end
 
-        hl = legend([hRange, hMid, hPoint],{'Range implied by SPF bins', 'Mid-range implied SPF bins', 'SPF point forecast'}, 'location', 'best');
+        hl = legend([hRange, hPoint],{'Range implied by SPF bins', 'SPF point forecast'}, 'location', 'best');
 
         if hz > 2
             xlim([datenum(2009,1,1) dates(end)]);
@@ -157,13 +157,13 @@ for d = 1 % : 2 % length(DATALABELS)
         end
 
         datetick('x','YYYY','keeplimits', 'keepticks');
-        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-hz%d-WITHLEGEND', datalabel, hz-1), wrap);
+        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-WITHOUTMID-hz%d-WITHLEGEND', datalabel, hz-1), wrap);
         delete(hl)
-        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-hz%d', datalabel, hz-1), wrap);
+        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-WITHOUTMID-hz%d', datalabel, hz-1), wrap);
         title(yearlabels{hz})
-        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-hz%d-WITHTITLE', datalabel, hz-1), wrap);
-        hl = legend([hRange, hMid, hPoint],{'Range implied by SPF bins', 'Mid-range implied SPF bins', 'SPF point forecast'}, 'location', 'best');
-        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-hz%d-WITHTITLELEGEND', datalabel, hz-1), wrap);
+        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-WITHOUTMID-hz%d-WITHTITLE', datalabel, hz-1), wrap);
+        hl = legend([hRange, hPoint],{'Range implied by SPF bins', 'SPF point forecast'}, 'location', 'best');
+        wrapthisfigure(thisfig, sprintf('%s-mean-WITHPOINT-WITHOUTMID-hz%d-WITHTITLELEGEND', datalabel, hz-1), wrap);
 
         ndx = SPFpoint < meanLB(:,hz);
         ndx(dates < datenum(1992,1,1)) = false;
