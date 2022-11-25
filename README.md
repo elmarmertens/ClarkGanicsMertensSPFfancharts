@@ -24,8 +24,6 @@ Data used for this project comprises SPF survey responses as well as realized va
 
 2. The [FRED database](https://fred.stlouisfed.org) hosted by the Federal Reserve Bank of St. Louis.
 
-#### Model estimation
-
 From the RTDRC we obtained SPF mean responses for the following variables (with SPF mnemonics in parentheses as listed on their [SPF website](https://www.philadelphiafed.org/surveys-and-data/data-files)):
 
 - Level of real GDP/GNP (RGDP)
@@ -38,14 +36,12 @@ In addition, for GDP growth and GDP inflation, we collected real-time measures o
 
 From FRED, we collected realized values for CPI, UNRATE and TBILL (mnemonics: CPIAUCSL, UNRATE, TB3MS) using ”final” vintage data.
 
-#### Forecast evaluation
-
 For forecast evaluation, we measure the outcomes of GDP growth and GDP inflation with the RTDSM vintage published two quarters after the outcome date (that is, we use the quarterly vintage in $t + h + 2$ to evaluate forecasts for $t+h$ made in $t$; this is the second estimate available in the RTDSM’s vintages). Because revisions to quarterly data are relatively small for the unemployment rate and CPI inflation and non-existent
 for the T-bill rate, we simply use the historical time series available in the St. Louis Fed’s FRED database to measure the outcomes and corresponding forecast errors for these variables.
 
 The replication set includes copies of the raw input files in `kensingtonDataUSSPF`. Below we also describe code that transforms the input data before further processing by our main estimation routines.
 
-In the ET paper, we only used data on real GDP, the GDP price index and the unemployment rate, as described in Section 2 therein. Additionally, we used the annual fixed-event probability forecasts for these variables from the [RTDRC website]([Probability Variables: Survey of Professional Forecasters].
+In the ET paper, we only used data on real GDP, the GDP price index and the unemployment rate, as described in Section 2 therein. Additionally, we used the annual fixed-event probability forecasts for these variables from the [SPF page at the RTDRC](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/probability-variables).
 
 ## Code
 
