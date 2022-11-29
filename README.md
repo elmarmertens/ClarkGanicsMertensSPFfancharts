@@ -112,15 +112,21 @@ The StateSpace paper's supplementary appendix also presents results of a model v
 
 ### To generate tables and figures
 
-Note: tables and figures listed below refer to the Cleveland Fed Working Paper version.
+Note: tables and figures listed below without a prefix refer to the Cleveland Fed Working Paper version, with prefix “S“ refer to the Supplementary materials.
 
-- `tabulateRelativeEvalstats.m`: relative forecast accuracy of CONST and SV models, both using MDS assumption (Table 2), and SV model with and without MDS assumption (Table 3).
-- `figuresETA4SV.m`: time-varying volatility estimates and absolute value of expectational updates of SV model (Figure 1).
+- `tabulateRelativeEvalstats.m`: relative forecast accuracy of CONST and SV models, both using MDS assumption (Table 2), and SV model with and without MDS assumption (Table 3, Table S.1).
+- `figuresETA4SV.m`: time-varying volatility estimates and absolute value of expectational updates of SV model (Figure 1, Figures S.3 to S.6).
 - `figuresYtermstructure.m`: real-time term structures of expectations based on SV model (Figures 2 to 5). To plot the full-sample estimates, run `figuresYtermstructureFinal.m`.
 - `figuresYuncertainty.m`: term structure of uncertainty based on SV model (Figure 6).
-- `figuresRMSEVAReta.m`: time-varying bias and MSE decomposition of SPF-consistent expectations in SV model without MDS assumption (Figure 7).
+- `figuresRMSEVAReta.m`: time-varying bias and MSE decomposition of SPF-consistent expectations in SV model without MDS assumption (Figure 7, Figures S.13 to S.19).
 - `figuresSEPfancharts.m`: SEP-style annual fan charts from SV model (Figure 8).
-- `figuresSEPfanchartsUncertainty.m`: annual uncertainty measures from SEP and SV model (Figure 9). 
+- `figuresSEPfanchartsUncertainty.m`: annual uncertainty measures from SEP and SV model (Figure 9).
+- `goSTATEtrendgapSV.m`(in `kensingtonMCMC`): MA coefficients of univariate representation of $y_t$ (Figure S.1), and estimates of square root of SV factor (Figure S.2).
+- `figuresYpredictivedensities.m`: forecast fan charts based on SV model (Figures S.7 to S.12).
+- `figuresLongrunEstimates2.m`: shifting endpoints of term structures of expectations, SV and CONST models (Figure S.20).
+- `figuresLongrunEstimatesAVG10.m`: shifting endpoints of term structures of expectations, SV and SV-AVG10 models (Figure S.21).
+- `figuresYpredictivedensities2.m`: forecast fan charts based on SV and SV-AVG10 models (Figures S.22 and S.23).
+- `tabulateRelativeEvalstatsAVG10.m`: relative forecast accuracy of SV and SV-AVG10 models (Tables S.2 and S.3).
 
 ## Specifics: EntropicTilting paper
 
