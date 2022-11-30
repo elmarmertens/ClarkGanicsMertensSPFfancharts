@@ -56,9 +56,10 @@ for the T-bill rate, we simply use the historical time series available in the S
 
 The replication set includes copies of the raw input files in the folder [`kensingtonDataUSSPF`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/kensingtonDataUSSPF). Below we also describe code that transforms the input data before further processing by our main estimation routines.
 
-In the ET paper, we only used data on real GDP, the GDP price index and the unemployment rate, as described in Section 2 therein. Additionally, we used the annual fixed-event probability forecasts for these variables from the [SPF page at the RTDRC](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/probability-variables)[^spfprob].
+In the ET paper, we only used data on real GDP, the GDP price index and the unemployment rate, as described in Section 2 therein. Additionally, we used the annual fixed-event probability forecasts for these variables from the [SPF page at the RTDRC](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/probability-variables)[^spfprob], and the RECESS variable (probability that real GNP/GDP will decline) available on the [SPF website](https://www.philadelphiafed.org/surveys-and-data/recess)[^spfrecess].
 
 [^spfprob]: https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/probability-variables
+[^spfrecess]: https://www.philadelphiafed.org/surveys-and-data/recess
 
 ### Code
 
@@ -149,11 +150,17 @@ The script `kensingtonFitDistributionSPF.m` fits generalized beta and normal dis
 
 ### To generate tables and figures
 
-Note: tables and figures listed below refer to the Cleveland Fed Working Paper version.
+Note: tables and figures listed below without a prefix refer to the Cleveland Fed Working Paper version, and tables and figures with the prefix “S“ referring to the Supplementary materials.
 
-- `kensingtonTable1.m`: forecast accuracy comparison tables (SV and CONST), tilting to SPF histograms (Tables 2 and 3).
-- `tabulateRelativeEvalstatsETSPFCDF.m`: forecast accuracy comparison table (SV and CONST models, tilting to SPF histograms vs. tilting to mean, variance and skewness of fitted generalized beta distribution, Table 4).
-- `SPFmeanRanges.m`: comparison of annual SPF point forecasts vs. range of means compatible with histograms (Figure 1).
+- `kensingtonTable1.m`: forecast accuracy comparison tables (SV and CONST), tilting to SPF histograms (Tables 2 and 3, Tables S.2 and S.14).
+- `tabulateRelativeEvalstatsETSPFCDF.m`: forecast accuracy comparison table, SV and CONST models, tilting to SPF histograms vs. tilting to moments of fitted generalized beta distribution (Table 4, Tables S.7 to S.11 and S.16 to S.20).
+- `SPFmeanRanges.m`: comparison of annual SPF point forecasts vs. range of means compatible with histograms (Figure 1, Figures S.1 and S.2).
 - `figuresCDFybar4.m`: impact of entropic tilting on cumulative distribution functions (SV and CONST) along with cumulative SPF probabilities (Figures 2 and 3).
-- `figuresYuncertaintyET.m`: term structures of uncertainty of SV model with and without entropic tilting (Figure 4).
+- `figuresYuncertaintyET.m`: term structures of uncertainty of SV model with and without entropic tilting (Figure 4, Figure S.14).
 - `tabulateRelativeDRPS.m`: DRPS of models (SV and CONST) and SPF for annual forecasts (Figure 5).
+- `tabulateRelativeDRPScurrent.m`: DRPS of models (SV and CONST) and SPF for annual forecasts, _including_ current-year predictions (Tables S.3, S.4 and S.15, Figures S.3, S.4 and S.15).
+- `kensingtonTable1since2009.m`: forecast accuracy comparison tables (SV and CONST), tilting to SPF histograms since the Great Recession (Tables S.5 and S.6).
+- `figuresYpredictivedensitiesET.m`: forecast fan charts of SV model with and without entropic tilting (Figures S.5 to S.7, S.12 and S.13).
+- `figuresRECESS.m`: recession probabilities and average cumulative DRPS of SPF, and SV and CONST models with and without entropic tilting (Figures S.8 and S.9).
+- `figuresFitCDFSPF.m`: skewness of generalized beta distribution fitted to SPF histograms (Figures S.10, S.11 and S.16).
+- `kensingtonTableSVBins.m`: forecast accuracy comparison tables including CONST model tilted to probabilities assigned to SPF bins from SV model (Tables S.12, S.13 and S.21).
