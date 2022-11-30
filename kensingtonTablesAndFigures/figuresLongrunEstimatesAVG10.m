@@ -1,4 +1,4 @@
-%% compute and plot bias in SPF-consistent expectations of VAReta
+%%  shifting endpoints of term structures of expectations, SV and SV-AVG10 models
 
 %% load toolboxes
 path(pathdef)
@@ -43,9 +43,7 @@ resultdir = localresultsMCMC;
 
 fontsize  = 24;
 
-% DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'TBILL', 'CPI'};
-
-DATALABELS = {'RGDP', 'TBILL', 'CPI'} % , 'CPI0510'};
+DATALABELS = {'RGDP', 'TBILL', 'CPI'}; % , 'CPI0510'};
 
 %% set up wrapper
 titlename = sprintf('longrunestimatesAVG10-%s-vs-%s', modeltype, modeltype2);

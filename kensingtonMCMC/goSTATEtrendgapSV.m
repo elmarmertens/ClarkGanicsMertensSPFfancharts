@@ -33,8 +33,6 @@ quicky     = false; % if TRUE: very short MCMC chains, no looping across variabl
 %  useful for testing code execution, see below for specific settings
 DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI', 'TBILL'};
 
-% selected data
-
 % select date
 
 thisDate       = datenum(2022,4,1);
@@ -98,7 +96,7 @@ for d = 1 : 5
     %% record location of missing values (NaN)
 
     samStart   = find(any(~Znanny,2),1); % for CPI/TBILL: leaves early sample with only Yrealized ...
-    % samStart   = find(sum(~Znanny,2) > 1,1); % first availability of SPF
+
 
     dates      = dates(samStart:end);
     T          = length(dates);

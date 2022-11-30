@@ -674,7 +674,7 @@ for pp = 5%1 : length(PAIRS)
         deltaloss22  = CRPS12 ./ CRPS02;
         deltaTstat2 = relCRPStstat;
         deltaTstat22 = relCRPStstat2;
-        % TODO: are the following lines still needed ?
+        
         % weed out "significant" relCRPS of 1.00
          ndx              = round(deltaloss2, 2) == 1;
          deltaTstat2(ndx) = 0;
@@ -829,26 +829,6 @@ end
 fprintf(fid, 'Forecasts are for quarterly outcomes and evaluation windows extend from %s until %s and %s, respectively (using data for realized values as far as available in %s). \n', samstartpretty, samendlongpretty, samendshortpretty,samendlongpretty);
 fprintf(fid, 'Significance assessed by Diebold-Mariano tests using Newey-West standard errors with $h + 1$ lags.\n');
 fprintf(fid, '%s\n', '$^{\ast\ast\ast}$, $^{\ast\ast}$ and $^{\ast}$ denote significance at the 1\%, 5\%, and 10\% level, respectively.');
-
-% fprintf(fid, append('Forecasts for quarterly '));
-% if length(DATALABELS_pretty) == 1
-%     fprintf(fid, DATALABELS_pretty{1});
-% elseif length(DATALABELS_pretty) == 2
-%     fprintf(fid, append(DATALABELS_pretty{1}, ' and ', DATALABELS_pretty{2}));
-% elseif length(DATALABELS_pretty) > 2
-%     for i = 1 : length(DATALABELS_pretty) - 1
-%         fprintf(fid, append(DATALABELS_pretty{i}, ', '));
-%     end
-%     fprintf(fid, append(' and ',DATALABELS_pretty{i}));
-% end
-
-%fprintf(fid, append([' $h$ steps ahead ' ...
-%    'over subsamples extending from 1992Q1 until 2022Q2 and 2016Q4, respectively (using data for realized values as far as available in 2022Q2). \n']));
-%fprintf(fid, 'Relative %s and %s of ``%s'''' vs. ``%s'''' (in denominator) and ``%s'''' vs. ``%s'''' (in denominator).\n', ...
-%    statname1, statname2, modelpretty1, modelpretty0, modelpretty12, modelpretty02);
-
-%fprintf(fid, '%s \n', comparisonNote);
-%fprintf(fid, 'Variable mnemonics: RGDP denotes real growth, PGDP changes in the GDP deflator and UNRATE the unemployment rate. (All growth rates are expressed as annualized percentage points of quarterly rates of change.)\n');
 
 
 

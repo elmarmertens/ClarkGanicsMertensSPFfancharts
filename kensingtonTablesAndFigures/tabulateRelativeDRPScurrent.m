@@ -33,7 +33,6 @@ datadir = fullfile('..', 'kensingtonDataMatfiles');
 
 % set modeldir
 resultdir = localresultsMCMC;
-resultdir = '~/jam/lager/KENSINGTON/kensingtonSPF2022Q2';
 
 
 %% define set of models to compare against SPF
@@ -47,26 +46,6 @@ m = m + 1;
 models(m).type   = 'STATEconst';
 models(m).pretty = 'CONST';
 models(m).Ndraws = 3e3;
-
-% m = 1;
-% models(m).type   = 'VARprior10STATEtrendgapSV';
-% models(m).pretty = 'SV (nonMDS)';
-% models(m).Ndraws = 3e3;
-% 
-% m = m + 1;
-% models(m).type   = 'VARprior10STATEconst';
-% models(m).pretty = 'CONST (non MDS)';
-% models(m).Ndraws = 3e3;
-
-% m = m + 1;
-% models(m).type   = 'STATEscaleSV';
-% models(m).pretty = 'scale SV';
-% models(m).Ndraws = 3e3;
-
-% m = m + 1;
-% models(m).type   = 'STATEtrendgapSVnoise2';
-% models(m).pretty = 'SV (w/outliers)';
-% models(m).Ndraws = 3e3;
 
 
 %% define set of eval windows
@@ -272,13 +251,7 @@ for dd = 1 : length(DATALABELS)
     fprintf(fid, '\\begin{center}\n');
     fprintf(fid, '\\begin{tabular}{l%s}\n', repmat('.5', 1, length(samples)));
     fprintf(fid, '\\toprule\n');
-    %     fprintf(fid, 'Models & \\multicolumn{%d}{c}{Samples} ', length(samples));
-    %     fprintf(fid, '\\\\\n');
-    %     fprintf(fid, '\\midrule\n');
-    %     fprintf(fid, '\\cmidrule(lr){%d-%d}', 2, Ncols);
-    %     fprintf(fid, '\n');
-    %     fprintf(fid, 'Model ');
-    %     fprintf(fid, '\\\\\n');
+
     for hh = 1 : maxNbar
         switch hh
             case 1

@@ -1,4 +1,4 @@
-%% compute and plot bias in SPF-consistent expectations of VAReta
+%% shifting endpoints of term structures of expectations, SV and CONST models
 
 %% load toolboxes
 path(pathdef)
@@ -27,13 +27,6 @@ doAVG5 = false; % CPI only
 
 %% some parameters
 
-
-
-
-% modeltype2   = 'STATEscaleSV';
-% modelpretty2 = 'scale SV';
-% Ndraws2      = 3e3;
-
 modeltype   = 'STATEtrendgapSV';
 modelpretty = 'SV';
 Ndraws      = 3e3;
@@ -41,18 +34,6 @@ Ndraws      = 3e3;
 modeltype2   = 'STATEconst';
 modelpretty2 = 'CONST';
 Ndraws2      = 3e3;
-%
-% modeltype   = 'STATEconst';
-% modelpretty = 'CONST';
-% Ndraws      = 3e3;
-%
-% modeltype2   = 'STATEtrendgapCONST';
-% modelpretty2 = 'TRENDGAP-CONST';
-% Ndraws2      = 3e3;
-
-% modeltype2   = 'STATEtrendgaplongSV';
-% modelpretty2 = 'SV-RGDP10';
-% Ndraws2      = 3e3;
 
 resultdir = localresultsMCMC;
 

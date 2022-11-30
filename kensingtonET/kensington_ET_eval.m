@@ -198,12 +198,6 @@ for m = 1 : length(models)
             fcstYCURRENTquantiles    = NaN(T,1,Nquantiles);
             fcstYCURRENTpercentiles  = NaN(T,1,Npercentiles);
 
-            % to be allocated below:
-            % fcstYhaterror        = NaN(T,Nhorizons);
-            % fcstYuncertainty     = NaN(T,Nhorizons);
-            % fcstYmedian          = NaN(T,Nhorizons); % predictive median
-            % fcstYmederror        = NaN(T,Nhorizons);
-            % fcstYskew            = NaN(T,Nhorizons);
 
             %% compute RECESS for RGDP
             if strcmpi(datalabel, 'RGDP')

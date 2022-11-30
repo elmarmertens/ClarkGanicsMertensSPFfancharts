@@ -35,7 +35,6 @@ ET_types = {'binsOnly', 'binsAndMeans',...
 MCMCdraws = 3e3;
 
 SPFprob = load(fullfile('..','kensingtonDataMatfiles','kensingtonPROB.mat')); % load all SPF density fcasts
-%RTdata  = load(fullfile('..','kensingtonDataMatfiles','kensingtonRTDSM.mat')); % load all real-time data
 
 opt_options = optimoptions('fminunc','Algorithm','trust-region','SpecifyObjectiveGradient',true,'Display','off','FiniteDifferenceType','central',...
     'OptimalityTolerance',1e-6,'FunctionTolerance',1e-6,'MaxIterations',1500,'HessianFcn','objective');

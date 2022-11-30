@@ -1,5 +1,4 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% annual uncertainty measures from SEP and SV model
 
 %% load toolboxes
 path(pathdef)
@@ -35,13 +34,10 @@ doCharts   = false;
 
 modeltype = 'trendgapSV';
 modelpretty = 'SV';
-% modeltype = 'const';
-% % modeltype = 'trendgapCONST';
-% modelpretty = 'CONST';
+
 Ndraws    = 3e3;
 
 resultdir   = localresultsMCMC;
-resultdir = '~/jam/lager/KENSINGTON/kensingtonSPF2022Q2';
 
 quantileP = [2.5 5 normcdf(-1) * 100 25 50 75 normcdf(1) * 100 95 97.5];
 ndx68     = [3 7];
@@ -141,7 +137,6 @@ for d = 1 : 3
     end
 
     %% create labels
-    % legendLabelsXXX    = {'this year', 'next year', 'two years ahead', 'three years ahead'};
     legendLabelsXXX    = {'this year', 'next year', 'two years', 'three years'};
     legendLabelsMCMC   = cellfun(@(x) sprintf('%s (%s)', x, modelpretty), legendLabelsXXX, 'UniformOutput', false);
 
@@ -152,11 +147,6 @@ for d = 1 : 3
     legendLabelsSEP = cellfun(@(x) sprintf('%s (SEP)', x), legendLabelsXXX, 'UniformOutput', false);
     sepdates        = sepdates(sepndx);
 
-    % drop three-year ahead
-    %     legendLabelsMCMC = legendLabelsMCMC(1:3);
-    %     legendLabelsSEP  = legendLabelsSEP(1:3);
-    %     uncertaintyMCMC  = uncertaintyMCMC(:,1:3);
-    %     uncertaintySEP   = uncertaintySEP(:,1:3);
 
     forecastOriginDates = dates(tndx);
 

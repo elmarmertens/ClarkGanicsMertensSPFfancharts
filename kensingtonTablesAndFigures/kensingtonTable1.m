@@ -26,7 +26,7 @@ clc
 
 %% parameters
 
-datalabel  = 'RGDP';
+datalabel  = 'RGDP'; % set variable, options are 'RGDP', 'PGDP', 'UNRATE'
 fontsize   = 18;
 
 %% define set of four models to compare

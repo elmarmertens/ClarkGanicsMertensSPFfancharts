@@ -1,5 +1,5 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% term structures of uncertainty of SV model with and without entropic tilting
+
 
 %% load toolboxes
 path(pathdef)
@@ -76,16 +76,8 @@ for m = [1 3] % : 2 % length(MODELTYPES)
         matfilename = sprintf('slimCGMmcmc-%s-Ndraws%d', modellabel, Ndraws);
         mat = matfile(fullfile(resultdir, matfilename));
 
-
-        % YdensityDraws = mat.YdensityDraws;
-        % Yhat          = mat.fcstYhatRB;
         Yquantiles    = mat.fcstYquantiles;
-        %         Yskew         = mat.fcstYskew;
-        %         Ydraws        = mat.Ydraws;
-        %         Yfuture       = mat.Yfuture;
         Nz            = mat.Nz;
-        %         Zdata         = mat.Zdata;
-        %         Znanny        = mat.Znanny;
 
         YBARquantiles     = mat.fcstYBARquantiles;
         YBARskew          = mat.fcstYBARskew;
@@ -107,7 +99,6 @@ for m = [1 3] % : 2 % length(MODELTYPES)
         datesQ        = mat.datesQ;
         doNIPA        = mat.doNIPA;
 
-        %         Tstart        = mat.Tstart;
         horizons      = 0:Nhorizons-1;
 
         Tstart        = find(dates == datenum(1992,1,1));
@@ -125,16 +116,6 @@ for m = [1 3] % : 2 % length(MODELTYPES)
         
         YBARuncertainty   = range(YBARquantiles(:,:,ndx68), 3);
         YBARuncertaintyET = range(YBARquantilesET(:,:,ndx68), 3);
-
-        %         writedatatable(wrap, sprintf('YBARuncertainty-%s', modellabel), ...
-        %             dates, YBARuncertainty, YBARlabel);
-        %         writedatatable(wrap, sprintf('Yuncertainty-%s', modellabel), ...
-        %             dates, Yuncertainty, Ylabel(2:end));
-        %
-        %         writedatatable(wrap, sprintf('YBARskew-%s', modellabel), ...
-        %             dates, YBARskew, YBARlabel);
-        %         writedatatable(wrap, sprintf('Yskew-%s', modellabel), ...
-        %             dates, Yskew, Ylabel(2:end));
 
 
 

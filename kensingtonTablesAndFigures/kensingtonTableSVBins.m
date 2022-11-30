@@ -1,4 +1,4 @@
-%% collect and tabulate eval stats
+%% collect and tabulate eval stats, including CONST model tilted to probabilities assigned to SPF bins from SV model
 
 %% load toolboxes
 path(pathdef)
@@ -439,12 +439,8 @@ fprintf(fid, 'Note: \n');
 fprintf(fid, 'Forecasts for quarterly GDP growth $h$ steps ahead over ');
 fprintf(fid, 'subsamples extending from %s until %s and %s, respectively (using data for realized values as far as available in %s).\n', ...
     datestr(sam(1).start, 'yyyyQQ'), datestr(sam(1).stop, 'yyyyQQ'), datestr(sam(2).stop, 'yyyyQQ'), datestr(dates(end), 'yyyyQQ'));
-% fprintf(fid, 'Ratios of %s and %s use %s model in denominator.\n', ...
-%     statname1, statname2, modelpretty0);
 fprintf(fid, 'Significance assessed by Diebold-Mariano tests using Newey-West standard errors with $h + 1$ lags.\n');
 fprintf(fid, '%s\n', '$^{\ast\ast\ast}$, $^{\ast\ast}$ and $^{\ast}$ denote significance at the 1\%, 5\%, and 10\% level, respectively.');
-% fprintf(fid, '``%s'''' and ``%s'''' refer to subsamples extending from %s until %s and %s, respectively (using data for realized values as far as available in %s).', ...
-%     sam(1).pretty, sam(2).pretty, datestr(sam(1).start, 'yyyyQQ'), datestr(sam(1).stop, 'yyyyQQ'), datestr(sam(2).stop, 'yyyyQQ'), datestr(dates(end), 'yyyyQQ'));
 fprintf(fid, '\\end{small}\n');
 
 fclose(fid);

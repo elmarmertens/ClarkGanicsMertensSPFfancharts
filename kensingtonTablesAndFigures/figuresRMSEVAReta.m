@@ -33,14 +33,11 @@ clc
 
 modeltype   = 'VARprior10STATEtrendgapSV';
 modelpretty = 'non-MDS (SV)';
-% modeltype   = 'VARprior10STATEconst';
-% modelpretty = 'non-MDS (CONST)';
 
 
 Ndraws      = 3e3;
 
 resultdir = localresultsMCMC;
-resultdir = '~/jam/lager/KENSINGTON/kensingtonresults3';
 
 fontsize = 18;
 
@@ -61,11 +58,6 @@ for d = 1 : length(DATALABELS)
     close all
     datalabel   = DATALABELS{d};
     modellabel  = strcat(datalabel, modeltype);
-
-    %% prepare latexwrapper
-    %     wrap = [];
-    %     titlename = sprintf('SPFbias-%s-%s', datalabel, modeltype);
-    %     initwrap
 
     fprintf('Processing %s ... \n', datalabel)
 
@@ -115,8 +107,6 @@ for d = 1 : length(DATALABELS)
         for hh = 1 : Nhorizons
             thisfig = figure;
             hold on
-            %             hVar  = plot(dates(Tstart:Tend) , spfYvar(Tstart:Tend, hh), 'linewidth', 2);
-            %             hBias = plot(dates(Tstart:Tend) , spfBias2(Tstart:Tend, hh), 'linewidth', 2);
             hanni  = bar(dates(Tstart:Tend) , [spfYvar(Tstart:Tend, hh) spfBias2(Tstart:Tend, hh)], 1, 'stacked');
             hanni(1).FaceColor = [1 1 1] * .7;
             hanni(1).EdgeColor =  hanni(1).FaceColor;
@@ -130,7 +120,6 @@ for d = 1 : length(DATALABELS)
             wrapthisfigure(thisfig, sprintf('SPFmsebars-h%d-%s-%s%s', hh-1, ...
                 datalabel, modeltype, covidLabel), wrap, [], [], [], [], true);
             legend(hanni, 'Forecast Error Variance', 'Squared Bias', 'location', 'northwest')
-            %             title(sprintf('MSE decomposition %s h=%d', datalabel, hh-1))
             wrapthisfigure(thisfig, sprintf('SPFmsebars-h%d-%s-%s%s-WITHLEGEND', hh-1, ...
                 datalabel, modeltype, covidLabel), wrap, [], [], [], [], false);
         end
@@ -144,12 +133,7 @@ for d = 1 : length(DATALABELS)
             hVar.LineStyle  = '-.';
             hVar.LineWidth  = 2;
             hBias.LineWidth = 1;
-            %             yyaxis left
-            %             axhanni(1) = gca;
-            %             hVar = plot(dates(Tstart:Tend) , spfYvar(Tstart:Tend, hh));
-            %             yyaxis right
-            %             axhanni(2) = gca;
-            %             hVar = plot(dates(Tstart:Tend) , spfBias2(Tstart:Tend, hh));
+            
             box off
             set(axhanni, 'FontSize', fontsize)
             %             yyaxis left
@@ -162,23 +146,6 @@ for d = 1 : length(DATALABELS)
                 datalabel, modeltype, covidLabel), wrap, [], [], [], [], false);
         end
 
-        %         %% plot RMSE components
-        %         for hh = 1 : Nhorizons
-        %             thisfig = figure;
-        %             hold on
-        %             hVar = plot(dates(Tstart:Tend) , Yvol(Tstart:Tend, hh), 'linewidth', 2);
-        %             hBias = plot(dates(Tstart:Tend), abs(spfBias(Tstart:Tend, hh)), 'linewidth', 2);
-        %             hRMSE = plot(dates(Tstart:Tend), sqrt(spfMSE(Tstart:Tend, hh)), '--', 'linewidth', 2);
-        %             box off
-        %             set(gca, 'FontSize', fontsize)
-        %             nbershades(dates(Tstart:Tend))
-        %             xticks(datenum(1970:5:2020,1,1))
-        %             xtickdates(dates(Tstart:Tend), 'keepticks')
-        %             legend([hVar, hBias, hRMSE], 'Predictive Vol', 'Abs. Bias', 'RMSE', 'location', 'northwest')
-        %             title(sprintf('RMSE components %s h=%d', datalabel, hh-1))
-        %             wrapthisfigure(thisfig, sprintf('SPFrmse-h%d-%s-%s%s-WITHLEGEND', hh-1, ...
-        %                 datalabel, modeltype, covidLabel), wrap, [], [], [], [], false);
-        %         end
 
         %% plot selected Bias
         horizons      = 0:Nhorizons-1;

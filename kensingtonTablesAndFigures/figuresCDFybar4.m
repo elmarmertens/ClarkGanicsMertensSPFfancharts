@@ -1,4 +1,4 @@
-%% collect and tabulate eval stats
+%% impact of entropic tilting on cumulative distribution functions
 
 %% load toolboxes
 path(pathdef)
@@ -232,12 +232,8 @@ for d = 1 % : length(DATALABELS)
         hold on
         mm = m1;
         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, '-', 'color', SVcolor, 'linewidth', 3);
-        %         mm = 2;
-        %         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, ':',  'color', SVcolor,  'linewidth', 3);
         mm = m2;
         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, '-',  'color', CONSTcolor, 'linewidth', 3);
-        %         mm = 4;
-        %         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, ':',  'color', CONSTcolor, 'linewidth', 3);
         if hh <= Nhz
             hSPF = plot(SPFbinEdges, SPFcdf(:,hh), 'd', 'color', SPFcolor, 'linewidth', 2);
             plot(upperSPFbinEdges, upperSPFcdf(:,hh), '-', 'color', SPFcolor, 'linewidth', 1)
@@ -270,12 +266,7 @@ for d = 1 % : length(DATALABELS)
         hold on
         mm = m1;
         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, '-', 'color', SVcolor, 'linewidth', 3);
-        %         mm = 2;
-        %         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, ':',  'color', SVcolor,  'linewidth', 3);
-        %         mm = m2;
-        %         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, '-',  'color', CONSTcolor, 'linewidth', 3);
-        %         mm = 4;
-        %         hanni(mm) = plot(ybarQuants(:,thisT,mm), percentiles, ':',  'color', CONSTcolor, 'linewidth', 3);
+      
         if hh <= Nhz
             hSPF = plot(SPFbinEdges, SPFcdf(:,hh), 'd', 'color', SPFcolor, 'linewidth', 2);
             plot(upperSPFbinEdges, upperSPFcdf(:,hh), '-', 'color', SPFcolor, 'linewidth', 1)
@@ -294,12 +285,12 @@ for d = 1 % : length(DATALABELS)
         wrapthisfigure(thisfig, sprintf('cdfplot-YBAR-%s-%s-%s', datalabel, ...
             modellabel{m1}, ...
             datestr(dates(thisT), 'yyyyQQ')), wrap, [], [], [], [], true);
-        % add realized value
-        %         hData = plot([YBARfuture(thisT,1) YBARfuture(thisT,1)], [0 100], '-', 'color', RealizedColor, 'linewidth', 2);
-        %         legend([hanni(m1); hSPF; hData], models(m1).pretty, 'SPF', 'Realization', 'location', 'northwest')
-        %         wrapthisfigure(thisfig, sprintf('cdfplot-YBAR-%s-%s-%s-h%d-WITHDATA', datalabel, ...
-        %             modellabel{m1}, ...
-        %             datestr(dates(thisT), 'yyyyQQ'), hh), wrap, [], [], [], [], true);
+        %add realized value
+                hData = plot([YBARfuture(thisT,1) YBARfuture(thisT,1)], [0 100], '-', 'color', RealizedColor, 'linewidth', 2);
+                legend([hanni(m1); hSPF; hData], models(m1).pretty, 'SPF', 'Realization', 'location', 'northwest')
+                wrapthisfigure(thisfig, sprintf('cdfplot-YBAR-%s-%s-%s-h%d-WITHDATA', datalabel, ...
+                    modellabel{m1}, ...
+                    datestr(dates(thisT), 'yyyyQQ'), hh), wrap, [], [], [], [], true);
 
         %% SV vs SV-ET
         m1 = 1;
@@ -414,7 +405,3 @@ end % DATALABEL
 finishwrap
 finishscript
 dockAllFigures
-
-
-
-

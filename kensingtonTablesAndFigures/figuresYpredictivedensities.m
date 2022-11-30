@@ -1,4 +1,4 @@
-%% STATE-SCALE-SV model
+%% forecast fan charts of STATE-SCALE-SV model
 % uses MDS assumption
 
 %% load toolboxes

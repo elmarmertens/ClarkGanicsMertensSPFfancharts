@@ -18,15 +18,10 @@ clc
 wrap = [];
 
 
-%% select choice of data: Inflation (GDPdeflator) or GDP growth
-
-
+%% select choice of data
 
 DATALABELS = {'CPI', 'TBILL', 'UNRATE', 'PGDP', 'RGDP'};
 
-
-% modeltype      = 'STATEtrendgapSVnoise2';
-% modeltype      = 'STATEconst';
 modeltype      = 'STATEtrendgapSV';
 titlename      = strcat('ETA4SV-', modeltype);
 initwrap
@@ -123,103 +118,6 @@ for doPreCOVID = false % [true false]
 
         end
 
-
-        %% MULTI PANEL PLOTS -- FINAL
-
-        %         panelGroups = {0:3, 4:7, 8:11, 12:15};
-        %
-        %         % abs ETA vs SV
-        %         hanni = NaN(3,1);
-        %
-        %         for pg = 1 : length(panelGroups)
-        %
-        %             pndx = panelGroups{pg};
-        %
-        %             thisfig = figure;
-        %             panelcount = 0;
-        %
-        %             for nn = 1 : length(pndx)
-        %
-        %                 n = pndx(nn);
-        %
-        %                 if n < size(etaFinalMid,2)
-        %                     panelcount = panelcount + 1;
-        %
-        %                     subplot(2,2,panelcount)
-        %                     set(gca, 'FontSize', 10)
-        %
-        %                     % orient landscape
-        %                     hold on
-        %                     if n <= 4
-        %                         barcol = .5 * [1 1 1];
-        %                     else
-        %                         barcol = .75 * [1 1 1];
-        %                     end
-        %                     hanni(1) = bar(dates(ndx), abs(etaFinalMid(ndx,n+1)), 1, 'FaceColor', barcol, 'EdgeColor', barcol);
-        %
-        %                     hanni(2) = plot(dates(ndx), etaSVFINAL(ndx,n+1), 'k-', 'linewidth', 3);
-        %
-        %                     hanni(3) = plot(dates(ndx), etaSV(ndx,n+1), '-.', 'color', [0 .5 0], 'linewidth', 2);
-        %
-        %                     xtickdates(dates(1:samEnd))
-        %                     maxy = max(ylim);
-        %                     ylim([0 maxy])
-        %
-        %                     if n == 1
-        %                         legend(hanni, '\bf |\eta|', 'SV (full-sample)', 'SV (real-time)', 'location', 'best')
-        %                     end
-        %                     title(sprintf('h=%d', n))
-        %                 end
-        %             end
-        %             sgtitle(sprintf('{\\bf %s} \n (full-sample, figure %d/%d)', datalabel, pg, length(panelGroups)))
-        %             wrapthisfigure(thisfig,sprintf('etaAllSV-group%d-%s-%s%s', pg, datalabel, modeltype, covidlabel), wrap, [], [], [], [], false)
-        %         end
-        %
-        %         %% MULTI PANEL PLOTS -- QRT
-        %
-        %         panelGroups = {0:3, 4:7, 8:11, 12:15};
-        %
-        %         % abs ETA vs SV
-        %         hanni = NaN(2,1);
-        %
-        %         for pg = 1 : length(panelGroups)
-        %
-        %             pndx = panelGroups{pg};
-        %
-        %             thisfig = figure;
-        %             panelcount = 0;
-        %
-        %             for nn = 1 : length(pndx)
-        %
-        %                 n = pndx(nn);
-        %
-        %                 if n < size(etaFinalMid,2)
-        %                     panelcount = panelcount + 1;
-        %
-        %                     subplot(2,2,panelcount)
-        %                     set(gca, 'FontSize', 10)
-        %
-        %                     % orient landscape
-        %                     hold on
-        %                     if n <= 4
-        %                         barcol = .7 * [0 1 0];
-        %                     else
-        %                         barcol = .8 * [0 1 0];
-        %                     end
-        %                     hanni(1) = bar(dates(ndx), abs(etaMid(ndx,n+1)), 1, 'FaceColor', barcol, 'EdgeColor', barcol);
-        %
-        %                     hanni(2) = plot(dates(ndx), etaSV(ndx,n+1), '-.', 'color', [0 .5 0], 'linewidth', 2);
-        %
-        %                     xtickdates(dates(1:samEnd))
-        %                     maxy = max(ylim);
-        %                     ylim([0 maxy])
-        %
-        %                     title(sprintf('h=%d', n))
-        %                 end
-        %             end
-        %             sgtitle(sprintf('{\\bf %s} \n (QRT figure %d/%d)', datalabel, pg, length(panelGroups)))
-        %             wrapthisfigure(thisfig,sprintf('etaAllSV-QRT-group%d-%s-%s%s', pg, datalabel, modeltype, covidlabel), wrap, [], [], [], [], false)
-        %         end
 
         %% prepare next loop
         if ~isempty(wrap)

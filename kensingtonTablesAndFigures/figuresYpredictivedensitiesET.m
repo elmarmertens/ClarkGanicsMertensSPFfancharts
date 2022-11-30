@@ -1,5 +1,4 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% forecast fan charts of SV model with and without entropic tilting
 
 %% load toolboxes
 path(pathdef)

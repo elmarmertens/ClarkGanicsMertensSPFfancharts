@@ -1,4 +1,4 @@
-%% compares terms structure of expectations from two models
+%% compares real-time and full-sample estimates of term structures of expectations
 
 %% load toolboxes
 path(pathdef)
@@ -29,13 +29,7 @@ DATALABELS = {'UNRATE', 'RGDP', 'TBILL', 'CPI', 'PGDP'};
 modeltype   = 'STATEtrendgapSV';
 modelpretty = 'SV model';
 Ndraws      = 3e3;
-resultdir   = localresultsMCMC;
-
-% modeltype   = 'STATEtrendgapSVshortlong';
-% modelpretty = 'SV model (short/long)';
-% Ndraws      = 1e3;
-% resultdir   = '~/jam/lager/KENSINGTON/kensingtonresultsShortlong/'; 
-
+resultdir   = localresultsMCMC; 
 
 quantileP = [2.5 5 normcdf(-1) * 100 25 50 75 normcdf(1) * 100 95 97.5];
 fontsize  = 24;
@@ -46,7 +40,7 @@ colorSPF1y = Colors4Plots(1);
 colorSPF2y = Colors4Plots(5);
 colorSPF3y = Colors4Plots(2);
 colorSPFquarterly =  [1 0 0];
-colorYterm  = .3 * [1 1 1]; % Colors4Plots(7);
+colorYterm  = .3 * [1 1 1];
 colorYterm2 = Colors4Plots(3);
 
 %% loop over datalabels
@@ -80,9 +74,6 @@ for d =  1 : length(DATALABELS)
     matfilename = sprintf('slimCGMmcmc-%s-Ndraws%d', modellabel, Ndraws);
     mat = matfile(fullfile(resultdir, matfilename));
 
-
-
-    %     YdensityDraws = mat.YdensityDraws;
     Ydraws        = mat.Ydraws;
     YFINALdraws   = mat.YFINALdraws;
 
@@ -149,14 +140,7 @@ for d =  1 : length(DATALABELS)
                     ylimits(2) = 0;
                 end
             case 'UNRATE'
-                %                 if all(ylimits > 0)
-                %                     ylimits(1) = 0;
-                %                 elseif all(ylimits < 0)
-                %                     ylimits(2) = 0;
-                %                 end
-                %                 if year(dates(thisT)) == 2020
-                %                     ylimits(2) = 20;
-                %                 end
+            
             case 'TBILL'
                 if all(ylimits > 0)
                     ylimits(1) = 0;
@@ -186,12 +170,6 @@ for d =  1 : length(DATALABELS)
                     ylimits(1) = 1;
                     ylimits(2) = 4.5;
                 end
-
-                
-                % if (year(dates(thisT)) >= 2017) && (year(dates(thisT)) <= 2019)
-                %    ylimits(1) = min(1, ylimits(1));
-                %    ylimits(2) = max(3, ylimits(2));
-                % end  
 
 
         end

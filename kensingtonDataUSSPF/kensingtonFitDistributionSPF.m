@@ -109,12 +109,6 @@ UNRATE_A_tmp_90idx = find(UNRATE_A_timetab.Time == datetime(1990,01,01));
 UNRATE_A_minmax = [min(UNRATE_A_tmp(1:UNRATE_A_tmp_90idx));max(UNRATE_A_tmp(1:UNRATE_A_tmp_90idx))];
 UNRATE_A_minmax = [2; 16];
 
-
-%RGDP_A_growth_minmax = [-12.517;19.74921]; % ALFRED
-%PGDP_A_growth_minmax = [-11.69375;12.94057]; % ALFRED
-%UNRATE_A_minmax = [1.2;24.9]; % Table 1 in Stanley Lebergott (1957) Annual Estimates of Unemployment in the United States,
-% 1900-1954, In: The Measurement and Behavior of Unemployment, National Bureau of Economic Research. URL: https://www.nber.org/system/files/chapters/c2644/c2644.pdf
-
 data_historical_minmax = [RGDP_A_growth_minmax,PGDP_A_growth_minmax,UNRATE_A_minmax];
 
 startdates = {'PRGDP', 'PRPGDP', 'PRUNEMP'; datenum('1992Q1','yyyyQQ'), datenum('1992Q1','yyyyQQ'), datenum('2009Q2','yyyyQQ')};

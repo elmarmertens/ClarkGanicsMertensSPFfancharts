@@ -1,5 +1,4 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% SEP-style annual fan charts from SV model
 
 %% load toolboxes
 path(pathdef)
@@ -33,8 +32,7 @@ doTitle    = false;
 
 modeltype = 'trendgapSV';
 modelpretty = 'SV';
-% modeltype = 'const';
-% modelpretty = 'CONST';
+
 Ndraws    = 3e3;
 
 resultdir   = localresultsMCMC;

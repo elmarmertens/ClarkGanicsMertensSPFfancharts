@@ -1,5 +1,4 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% forecast fan charts based on SV and SV-AVG10 models
 
 %% load toolboxes
 path(pathdef)
@@ -74,12 +73,10 @@ for d = 2 % 2 4] % 1 : length(DATALABELS)
     mat2 = matfile(fullfile(resultdir, matfilename));
 
 
-    %     YdensityDraws = mat.YdensityDraws;
     Yhat          = mat.fcstYhatRB;
     Yquantiles    = mat.fcstYquantiles;
     Ydraws        = mat.Ydraws;
 
-    % YdensityDraws2 = mat2.YdensityDraws;
     Yhat2         = mat2.fcstYhatRB;
     Yquantiles2   = mat2.fcstYquantiles;
     Ydraws2       = mat2.Ydraws;
@@ -104,12 +101,7 @@ for d = 2 % 2 4] % 1 : length(DATALABELS)
     if ~isequal(dates, mat2.dates)
         error('mismatch between input files for model1 and model2')
     end
-    %     if ~isequaln(Zdata, mat2.Zdata)
-    %         error('mismatch between input files for model1 and model2')
-    %     end
-    %     if ~isequaln(Yfuture, mat2.Yfuture)
-    %         error('mismatch between input files for model1 and model2')
-    %     end
+  
 
     %% prepare latexwrapper
     wrap = [];

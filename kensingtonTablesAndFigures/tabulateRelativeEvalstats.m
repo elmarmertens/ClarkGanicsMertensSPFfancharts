@@ -79,11 +79,6 @@ models(m).Ndraws = 3e3;
 %% set modeldir
 resultdir = localresultsMCMC;
 
-% resultdir = '~/jam/lager/KENSINGTON/kensingtonresultsNEW';
-% for m = 1 : length(models)
-%     models(m).Ndraws=1e3;
-% end
-
 %% define set of eval windows
 s = 1;
 sam(s).start  = [];
@@ -167,9 +162,6 @@ for pp = 1 : length(PAIRS)
             matfilename = sprintf('slimCGMmcmc-%s-Ndraws%d', modellabel1, Ndraws1);
             mat1 = matfile(fullfile(resultdir, matfilename));
 
-
-            % YdensityDraws  = mat.YdensityDraws;
-            % YdensityDraws1 = mat1.YdensityDraws;
 
             Yfuture       = mat0.Yfuture;
             Nz            = mat0.Nz;

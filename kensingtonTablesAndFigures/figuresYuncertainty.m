@@ -1,5 +1,4 @@
-%% STATE-SCALE-SV model
-% uses MDS assumption
+%% plots term structure of uncertainty
 
 %% load toolboxes
 path(pathdef)
@@ -103,8 +102,6 @@ for m = 1 % [1 3] % : 2 % length(MODELTYPES)
         Yuncertainty    = range(Yquantiles(:,:,ndx68), 3);
         YBARuncertainty = range(YBARquantiles(:,:,ndx68), 3);
 
-
-
         %% plot selected
         HorizonLabels = arrayfun(@(x) sprintf('h=%d', x), horizons, 'uniformoutput', false);
 
@@ -127,38 +124,6 @@ for m = 1 % [1 3] % : 2 % length(MODELTYPES)
         legend([hanniNear; hanni], HorizonLabels([ndxHnear ndxH]), 'Location','best')
         wrapthisfigure(thisfig, sprintf('Yuncertainty-%s-WITHLEGEND', modellabel), wrap)
 
-        %         % pre covid
-        %         T2019 = find(dates == datenum(2018,10,1));
-        %         datendx = Tstart : T2019;
-        %         thisfig = figure;
-        %         hold on
-        %         set(gca, 'FontSize', fontsize)
-        %         hanniNear = plot(dates(datendx), Yuncertainty(datendx,ndxHnear), '-.', 'linewidth', 2);
-        %         hanni = plot(dates(datendx), Yuncertainty(datendx,ndxH), 'linewidth', 2);
-        %         xticks(dates(Tstart+8 : 16 : T2019))
-        %         xtickdates(dates(datendx), 'keepticks')
-        %         ylim([0 max(ylim)])
-        %         if doTitle
-        %             title(datalabel)
-        %         end
-        %         wrapthisfigure(thisfig, sprintf('Yuncertainty-%s-preCovid', modellabel), wrap, [], [], [], [], true);
-        %         legend([hanniNear; hanni], HorizonLabels([ndxHnear ndxH]), 'Location','best')
-        %         wrapthisfigure(thisfig, sprintf('Yuncertainty-%s-WITHLEGEND-preCovid', modellabel), wrap)
-        %
-        %         % since covid
-        %         datendx = T2019 - 7 : T;
-        %         thisfig = figure;
-        %         hold on
-        %         set(gca, 'FontSize', fontsize)
-        %         hanniNear = plot(dates(datendx), Yuncertainty(datendx,ndxHnear), '-.', 'linewidth', 2);
-        %         hanni = plot(dates(datendx), Yuncertainty(datendx,ndxH), 'linewidth', 2);
-        %         xtickdates(dates(datendx))
-        %         if doTitle
-        %             title(datalabel)
-        %         end
-        %         wrapthisfigure(thisfig, sprintf('Yuncertainty-%s-sinceCovid', modellabel), wrap, [], [], [], [], true);
-        %         legend([hanniNear; hanni], HorizonLabels([ndxHnear ndxH]), 'Location','best')
-        %         wrapthisfigure(thisfig, sprintf('Yuncertainty-%s-WITHLEGEND-sinceCovid', modellabel), wrap)
 
         %% YBAR
         if doYBAR

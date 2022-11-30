@@ -1,4 +1,4 @@
-%% CGM plotting cumulative histograms and fitted normal and generalized beta CDFs
+%% plotting cumulative histograms and fitted normal and generalized beta CDFs, along with moments
 
 %% load toolboxes
 path(pathdef)
@@ -134,9 +134,6 @@ SPFHISTdata        = matfile(fullfile(datadir,sprintf('kensington%sdataHISTOGRAM
             betamean_tmp        = thisBetaparams(1) + (thisBetaparams(2) - thisBetaparams(1)) * (thisBetaparams(3) / (thisBetaparams(3) + thisBetaparams(4)));
             betastd_tmp         = sqrt(thisBetaparams(3) * thisBetaparams(4) * (thisBetaparams(2) - thisBetaparams(1))^2 / ((thisBetaparams(3) + thisBetaparams(4))^2 * (thisBetaparams(3) + thisBetaparams(4) + 1)));
             
-            beta_q_tmp          = betainv([0.25;0.5;0.75],thisBetaparams(3),thisBetaparams(4))*(thisBetaparams(2) - thisBetaparams(1)) + thisBetaparams(1);
-            beta_q_tmp          = betainv([0.1;0.5;0.9],thisBetaparams(3),thisBetaparams(4))*(thisBetaparams(2) - thisBetaparams(1)) + thisBetaparams(1);
-            %betaskew_tmp        = (beta_q_tmp(1) + beta_q_tmp(3) - 2 * beta_q_tmp(2)) / (beta_q_tmp(3) - beta_q_tmp(1));
             betaskew_tmp        = 2 * (thisBetaparams(4) - thisBetaparams(3)) * sqrt(thisBetaparams(3) + thisBetaparams(4) + 1) / ((thisBetaparams(3) + thisBetaparams(4) + 2) * sqrt(thisBetaparams(3) * thisBetaparams(4)));
 
             this_betameanstdskew(thisT,hh,1:3) = [betamean_tmp;betastd_tmp;betaskew_tmp];
@@ -350,20 +347,8 @@ SPFHISTdata        = matfile(fullfile(datadir,sprintf('kensington%sdataHISTOGRAM
 
             thisfig = figure;
             hold on
-            
-
-%             lastNotNaN   = find(~isnan(SPFHISTdata.fcstSPFdrps(:,hh-1)),1,'last');
-%             firstNotNaN  = find(~isnan(SPFHISTdata.fcstSPFdrps(:,hh-1)),1,'first');
-%             numpadend    = thislastT-lastNotNaN;
-%             recmean_fact = (1 : (lastNotNaN-firstNotNaN+1))';
-%             SPF_DRPS     = [NaN(firstNotNaN-1,1);cumsum(SPFHISTdata.fcstSPFdrps(firstNotNaN:lastNotNaN,hh-1))./recmean_fact;NaN(numpadend,1)];
-        
-            %lastNotNaN   = find(~isnan(normSPFdrps(:,hh)),1,'last');
-            %firstNotNaN  = find(~isnan(normSPFdrps(:,hh)),1,'first');
-            %numpadend    = thislastT-lastNotNaN;
-            %recmean_fact = (1 : (lastNotNaN-firstNotNaN+1))';
-            %normDRPS_recmean = [NaN(firstNotNaN-1,1);cumsum(normSPFdrps(firstNotNaN:lastNotNaN,hh))./recmean_fact;NaN(numpadend,1)];
-            %betaDRPS_recmean = [NaN(firstNotNaN-1,1);cumsum(betaSPFdrps(firstNotNaN:lastNotNaN,hh))./recmean_fact;NaN(numpadend,1)];
+                   
+          
             plot(thisDATA.dates,recmeanNorm-recmeanSPF,'Color',Ncolor,'LineWidth',1.5,'LineStyle',linestylevec{2});
             plot(thisDATA.dates,recmeanGBeta-recmeanSPF,'Color',Gbetacolor,'LineWidth',1.5,'LineStyle',linestylevec{3});
         

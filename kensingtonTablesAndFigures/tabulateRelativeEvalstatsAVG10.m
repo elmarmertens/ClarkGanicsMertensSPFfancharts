@@ -26,7 +26,7 @@ clc
 
 %% parameters
 
-DATALABELS = {'RGDP', 'CPI', 'TBILL'}; % , 'PGDP', 'UNRATE', 'TBILL', 'CPI'};
+DATALABELS = {'RGDP', 'CPI', 'TBILL'};
 fontsize   = 18;
 
 Nhorizons  = 16;
@@ -57,11 +57,6 @@ models(m).Ndraws = 3e3;
 
 %% set modeldir
 resultdir = localresultsMCMC;
-
-% resultdir = '~/jam/lager/KENSINGTON/kensingtonresultsNEW';
-% for m = 1 : length(models)
-%     models(m).Ndraws=1e3;
-% end
 
 %% define set of eval windows
 s = 1;
