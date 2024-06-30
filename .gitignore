@@ -21,6 +21,5 @@ foo*.m
 !/mcmcKensington/
 !/tablesandfiguresKensington/
 !/rawdataKensington/
-!/toolboxKensington/
 !/matlabtoolbox/em*/
 /*Kensington/local*.m
