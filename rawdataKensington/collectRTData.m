@@ -222,7 +222,7 @@ CPI.vindates=vindates_CPI;
 
 %% save RT data --- separate files for each variable
 
-DATALABELS = {'RGDP','PGDP','UNRATE','CPI'}; % ,'TBILL'};
+DATALABELS = {'RGDP','PGDP','UNRATE','CPI'}; 
 
 for d = 1 : length(DATALABELS)
     datalabel = DATALABELS{d};
