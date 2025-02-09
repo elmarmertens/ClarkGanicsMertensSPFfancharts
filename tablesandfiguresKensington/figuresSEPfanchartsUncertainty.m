@@ -295,9 +295,8 @@ for MDStype = {'MDS'} % {'MDS', 'VAR0'}
             thisfig = figure;
             hold on
             set(gca, 'fontsize', fontsize)
-            nanNdx  = any(isnan(errorbandMCMC(:,yy,:)),3); % todo: needed?
+            nanNdx  = any(isnan(errorbandMCMC(:,yy,:)),3); 
             hMCMC   = plot(forecastOriginDates(~nanNdx),squeeze(errorbandMCMC(~nanNdx,yy,:)), '-', 'color', colors4plots('blue'), 'LineWidth', 4);
-            % sepNaN  = all(isnan(errorbandSEP(:,yy)), 2);
             sepLine = ':';
             hSEP    = plot(SEPbandsDates,squeeze(errorbandSEP(:,yy,:)), sepLine, 'color', colors4plots('orange'), 'LineWidth', 4);
 

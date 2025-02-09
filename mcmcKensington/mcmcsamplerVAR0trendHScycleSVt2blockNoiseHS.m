@@ -581,7 +581,6 @@ while thisMCMCdraw < MCMCdraws
         [hPREV, ~, h0PREV, ~, tscalelog2PREV, tdofPREV] = Block2StochVoltAR1(y2, logy2, svN11, ndxSV11, svN22, ndxSV22, hPREV, rhoPREV, chol(hvcvPREV, "lower"), KSC, KSCt, tdof, Ngap, T, rndStream);
         
         %% SV-AR1 rho draw
-        % TODO: consider storing chol(hvcvPREV, "lower") ?
         hLAG     = [h0PREV, hPREV(:,1:end-1)];
         rhodraws = bayesAR1SURdraw(hPREV', hLAG', hvcvPREV, rho0, rhoV0i, maxShake, rndStream);
         shake    = 0;

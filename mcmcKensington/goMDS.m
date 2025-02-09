@@ -246,13 +246,6 @@ for d = 1 : length(DATALABELS)
     % maxlogESV      = 10; % max vol of about 150
     for mm = 1 : MCMCdraws
         
-        % collect Sigma
-        % thisrho          = hrhodraws1(:,mm);
-        % logESV           = diag(hvcvdraws1(:,:,mm)) ./ (1 - thisrho.^2) ...
-        %     + log(tdofdraws1(:,mm)) - log((tdofdraws1(:,mm) - 2));
-        % logESV(logESV > maxlogESV) = maxlogESV;
-        % ESV              = exp(.5 .* logESV);
-        
         ESV              = median(SVtdraws1(:,:,mm),2);
         
         volTrend         = sqrt(mustarvardraws1(mm));
@@ -421,7 +414,6 @@ for d = 1 : length(DATALABELS)
     thisfig = figure;
     hold on
     set(gca, 'fontsize', fontsize)
-    % note: using the mean (to match observed)
     % plot density
     h1 = plot(0:Nhorizons-1,mean(YdensityDraws1,2), '-', 'color', color1, 'LineWidth', 4); %#ok<NASGU>
     plot(0:Nhorizons-1,prctile(YdensityDraws1, normcdf([-1 1]) * 100, 2), '-', 'color', color1, 'LineWidth', 2)

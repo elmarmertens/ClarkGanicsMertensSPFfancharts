@@ -549,7 +549,6 @@ for mtp = MODELTYPES
         thisfig = figure;
         hold on
         set(gca, 'fontsize', fontsize)
-        % note: using the mean (to match observed)
         % plot density
         mid1   = mean(YdensityDraws1,2);
         tails1 = prctile(YdensityDraws1, [5 normcdf([-1 1]) * 100 95], 2);

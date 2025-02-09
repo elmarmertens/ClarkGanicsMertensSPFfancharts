@@ -10,6 +10,7 @@ The replication set contains code and all input data in its raw form, obtained f
 
 The materials provided do not necessarily reflect the views of the Federal Reserve Bank of Cleveland, the Federal Reserve System, the Banco de España, the Deutsche Bundesbank, or the Eurosystem.
 
+A copy of this replication package is also maintained at https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts.
 
 ## Data files
 

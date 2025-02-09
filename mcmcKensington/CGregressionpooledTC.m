@@ -1,7 +1,7 @@
 function slopes = CGregressionpooledTC(PItilde,SIGMAtilde,sigTrend,Hpools)
 % CGregressionpooled - Compute the slopes of pooled CG regressions in trend-cycle model
-%  slopes = CGregressionpooled(G,PSI,Hpools)
-% G are VAR slopes, PSI is VCV of forecast updates and Hpools is cell list of horizons to be pooled
+% slopes = CGregressionpooledTC(PItilde,SIGMAtilde,sigTrend,Hpools)
+% PItilde are VAR slopes, SIGMAtlde is VCV of gap updates, sigtrend is ternd-shock variance and Hpools are cells of vectors listing the horizons to be pooled
 
 Ngap    = size(PItilde,1);
 I       = eye(Ngap);

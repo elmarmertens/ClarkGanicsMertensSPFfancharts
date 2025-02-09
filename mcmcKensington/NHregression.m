@@ -1,5 +1,5 @@
 function slopes = NHregression(G,PSI,H)
-% NHregression - computes the slopes of the NH regression
+% NHregression - computes the slopes of the Norhdaus ("NH") regression
 % slopes = NHregression(G,PSI,H)
 % G are VAR slopes, PSI is VCV of forecast updates and H is max horizon
 

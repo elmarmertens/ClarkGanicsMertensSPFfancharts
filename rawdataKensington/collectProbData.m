@@ -231,7 +231,6 @@ for d = 1 : length(DATALABELS)
         SPFhistograms(t).cdf   = cumsum(histProbs, 1);
         
         SPF_diffs(t,1:Nhz) = 100*(sum(histProbs,1,'omitnan') - 1);
-        %checkdiff(sum(histProbs) - 1); % TODO: renormalize to add to one exactly?
         
         % construct upper/lower contours of CDF
         [ upperEdges, lowerEdges, upperCDF, lowerCDF ] = deal(NaN(Nbins + Nbins - 1, Nhz));

@@ -19,13 +19,6 @@ SSRgrid    = repmat(permute(SSR, [1 3 2]), [1 tdof.Ndof 1]);
 dataloglike   = - .5 * (tdof.values + Ny) .* sum(log(1 + (SSRgrid ./ tdof.values)), 3); 
 loglike       = tdof.loglike0 + dataloglike;
 
-% loglikeCheck   = sum(gammaln(.5 * (tdof.values + Ny)) - gammaln(.5 * tdof.values) - .5 * Ny .* log(tdof.values) - .5 * Ny * log(pi) - .5 * (tdof.values + Ny) .* log(1 + (SSRgrid ./ tdof.values)), 3);
-% checkdiff(loglike, loglikeCheck);
-% 
-% loglike0Check   = T * (gammaln(.5 * (tdof.values + Ny)) - gammaln(.5 * tdof.values) - .5 * Ny .* log(tdof.values)  - .5 * Ny * log(pi));
-% checkdiff(tdof.loglike0, loglike0Check);
-
-
 logposteriorKernel = tdof.logprior + loglike;
 
 % subtract const to avoid overflow
@@ -42,7 +35,6 @@ tdofDraw       = tdof.values(dofState); % (scalar)
 scalePosterior     = tdofDraw + SSR; 
 chi2draws          = chi2rnd(tdofDraw + Ny, 1, T); 
 tscalelog2Draws    = log(scalePosterior) - log(chi2draws);
-% slightly slower: tscalelog2Draws    = log(igamdraw(scalePosterior, tdofDraw + Ny));
 
 %% draw mixture states
 % zdraws are standardized draws for each component of the normal mixture 
