@@ -1,37 +1,27 @@
-# CLARK-GANICS-MERTENS REPLICATION FILES
-
-This readme file describes the set of replication files (“the replication set“) for  “Constructing Fan Charts from the Ragged Edge of SPF Forecasts.“ 
-
-Replication code for an earlier version of this project, alongside codes for a companion paper, titled “What Is the Predictive Value of SPF Point and Density Forecasts?“ can be found in the branch "EntropicTiltingPaper2022" of this repository.
-
-The replication set contains code as well as all of our input data in raw form as obtained from their original sources described further below. 
-
-The project is work in progress, and all results are to be considered preliminary.  The materials provided do not necessarily reflect the views of the Federal Reserve Bank of Cleveland, the Federal Reserve System, the Banco de España, the Deutsche Bundesbank, or the Eurosystem.
-
-Recent copies of the paper and its supplementary online appendix are posted at [www.elmarmertens.com](https://www.elmarmertens.com)
-
-## Authors
+# Replication package for "Constructing Fan Charts from the Ragged Edge of SPF Forecasts" 
 
 - Todd E. Clark (Federal Reserve Bank of Cleveland)
 - Gergely Ganics (Banco de España)
-- Elmar Mertens (Deutsche Bundesbank) [^em] 
+- Elmar Mertens (Deutsche Bundesbank; corresponding author: [em@elmarmertens.com](mailto:em@elmarmertens.com) [www.elmarmertens.com](https://www.elmarmertens.com))
 
-[^em]: Corresponding author: [em@elmarmertens.com](mailto:em@elmarmertens.com)
+This README file describes the replication package ("the replication set") for our paper "Constructing Fan Charts from the Ragged Edge of SPF Forecasts." 
+
+The replication set contains code and all input data in its raw form, obtained from the original sources described below.
+
+The materials provided do not necessarily reflect the views of the Federal Reserve Bank of Cleveland, the Federal Reserve System, the Banco de España, the Deutsche Bundesbank, or the Eurosystem.
+
 
 ## Data files
 
-Data used for this project comprises SPF survey responses as well as realized values for up to five different macroeconomic variables. Additional details are also described in Sections 3 and 2 of the StateSpace and EntropicTilting papers, respectively. All data were obtained from two, publicly available online sources: 
+Data used for this project comprise SPF survey responses as well as realized values for up to five different macroeconomic variables. Additional details are also described in Sections 3 and 2 of the StateSpace and EntropicTilting papers, respectively. All data were obtained from two, publicly available online sources: 
 
-1. The [Real-Time Data Research Center (RTDRC)](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research)[^rtdrc] at the Federal Reserve Bank of Philadelphia.
+1. The [Real-Time Data Research Center (RTDRC)](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research)  at the Federal Reserve Bank of Philadelphia (https://www.philadelphiafed.org/surveys-and-data/real-time-data-research).
 
-2. The [FRED database](https://fred.stlouisfed.org)[^fred] hosted by the Federal Reserve Bank of St. Louis.
+2. The [FRED database](https://fred.stlouisfed.org) hosted by the Federal Reserve Bank of St. Louis (https://fred.stlouisfed.org) .
 
-[^rtdrc]: https://www.philadelphiafed.org/surveys-and-data/real-time-data-research
-[^fred]: https://fred.stlouisfed.org
 
-From the RTDRC we obtained SPF mean responses for the following variables (with SPF mnemonics in parentheses as listed on the [SPF website](https://www.philadelphiafed.org/surveys-and-data/data-files)[^spf]):
+From the RTDRC we obtained SPF mean responses for the following variables (with SPF mnemonics in parentheses as listed on the [SPF website](https://www.philadelphiafed.org/surveys-and-data/data-files), https://www.philadelphiafed.org/surveys-and-data/data-files):
 
-[^spf]: https://www.philadelphiafed.org/surveys-and-data/data-files
 
 - Level of real GDP/GNP (RGDP)
 - Level of the price index for GDP/GNP (PGDP)
@@ -39,37 +29,35 @@ From the RTDRC we obtained SPF mean responses for the following variables (with 
 - CPI inflation rate (CPI)
 
 
-In addition, for GDP growth and GDP inflation, we collected real-time measures of quarter $t-1$ data as these data were publicly available in quarter $t$ from the quarterly files of real-time data in the Philadelphia Fed's [Real-Time Data Set for Macroeconomists (RTDSM)](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-full-time-series-history)[^rtdsm].
-
-[^rtdsm]: https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-full-time-series-history
+In addition, for GDP growth and GDP inflation, we collected real-time measures of quarter $t-1$ data as these data were publicly available in quarter $t$ from the quarterly files of real-time data in the Philadelphia Fed's [Real-Time Data Set for Macroeconomists (RTDSM)](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-full-time-series-history) (https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-full-time-series-history).
 
 From FRED, we collected realized values for CPI and UNRATE and  (mnemonics: CPIAUCSL and UNRATE) using ”final” vintage data.
 
-For forecast evaluation, we measure the outcomes of GDP growth and GDP inflation with the RTDSM vintage published two quarters after the outcome date (that is, we use the quarterly vintage in $t + h + 2$ to evaluate forecasts for $t+h$ made in $t$; this is the second estimate available in the RTDSM’s vintages). Because revisions to quarterly data are relatively small for the unemployment rate and CPI inflation and non-existent
+For forecast evaluation, we measure the outcomes of GDP growth and GDP inflation with the RTDSM vintage published two quarters after the outcome date (that is, we use the quarterly vintage in $t + h + 2$ to evaluate forecasts for $t+h$ made in $t$; this is the second estimate available in the RTDSM’s vintages). Because revisions to quarterly data are relatively small for the unemployment rate and CPI inflation and nonexistent
 for the T-bill rate, we simply use the historical time series available in the St. Louis Fed’s FRED database to measure the outcomes and corresponding forecast errors for these variables.
 
-The replication set includes copies of the raw input files in the folder [`rawdataKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington). Below we also describe code that transforms the input data before further processing by our main estimation routines.
+The replication set includes copies of the raw input files in the folder [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington). Below we also describe code that transforms the input data before further processing by our main estimation routines.
 
 
 ### Code
 
-All code used for this project was written in MATLAB. The code has been run on various, recent MATLAB versions (Versions 2022a through 2024a) as well as different operating systems (Linux, Windows and macOS) without the need for any particular adjustments across platforms. The code uses MATLAB’s Statistics and Machine Learning Toolbox toolbox as well as (optionally) the Parallel Computing Toolbox. 
+All code used for this project was written in MATLAB. The code has been run on various, recent MATLAB versions (Versions 2022a through 2024a) as well as different operating systems (Linux, Windows and macOS) without the need for any particular adjustments across platforms. The code uses MATLAB's Statistics and Machine Learning Toolbox as well as (optionally) the Parallel Computing Toolbox. 
 
-The MATLAB code also creates LaTeX files collecting tables and figures produced by the MATLAB code. If a LaTeX installation is present (and if the “pdflatex” command is available on the command line via MATLAB’s “system” command), the LaTeX files will also be compiled into PDF files.
+The MATLAB code also creates LaTeX files collecting tables and figures produced by the MATLAB code. If a LaTeX installation is present (and if the `pdflatex` command is available on the command line via MATLAB's "system" command), the LaTeX files will also be compiled into PDF files.
 
 The replication code comes in the following subdirectories: 
 
-- [`rawdataKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington) contains raw data files obtained from the sources described above as well as MATLAB files for transforming the raw inputs into a set of `.mat` files (one for each of the variables). 
-- [`matdataKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/matdataKensington) is a placeholder, to be populated by the `.mat` files generated by the scripts in `rawdataKensington`. 
-- [`mcmcKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) contains various scripts and functions to perform MCMC estimation of our models.
-- [`tablesandfiguresKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) contains various scripts to collect results (as generated by code provided in the `mcmcKensington` directory) and produce tables and figures. 
-- [`matlabtoolbox`](https://github.com/elmarmertens/em-matlabbox) contains a GitHub submodule with various folders providing different auxiliary `.m`-files (MATLAB scripts and functions) also available at https://github.com/elmarmertens/em-matlabbox, with further documentation found there. The scripts used in this repository load the appropriate toolbox folders automatically onto the MATLAB path as needed.
+- [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington) contains raw data files obtained from the sources described above as well as MATLAB files for transforming the raw inputs into a set of `.mat` files (one for each of the variables). 
+- [matdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/matdataKensington) is a placeholder, to be populated by the `.mat` files generated by the scripts in `rawdataKensington`. 
+- [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) contains various scripts and functions to perform MCMC estimation of our models.
+- [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) contains various scripts to collect results (as generated by code provided in the `mcmcKensington` directory) and produce tables and figures. 
+- [matlabtoolbox](https://github.com/elmarmertens/em-matlabbox) contains a GitHub submodule with various folders providing different auxiliary `.m`-files (MATLAB scripts and functions) also available at https://github.com/elmarmertens/em-matlabbox, with further documentation found there. The scripts used in this repository load the appropriate toolbox folders automatically onto the MATLAB path as needed. We used the following commit hash of the toolbox: [1e9e6bedfc60b0862183cfafe83883cb744a8330](https://github.com/elmarmertens/em-matlabbox/tree/07374b9e748d7cad3a6728e591d333893d41dca7); in GitHub the commit is also tagged as [CGMreplicationPackage](https://github.com/elmarmertens/em-matlabbox/releases/tag/CGMreplicationPackage).
 
 ### To prepare input data files for estimation
 
-The directory `rawdataKensington` contains all of the raw data files obtained from  RTDRC and FRED described above. In addition, the directory contains several `.m`-file scripts to transform  the raw data input files for further processing by our main estimation routines contained in `mcmcKensington`. All `.m`-file scripts create `.mat` data files in MATLAB format.
+The directory `rawdataKensington` contains all of the raw data files obtained from  RTDRC and FRED described above. In addition, the directory contains several `.m` scripts to transform  the raw data input files for further processing by our main estimation routines contained in `mcmcKensington`. All `.m` scripts create `.mat` data files in MATLAB format.
 
-To process raw data for all variables (RGDP, PGDP, CPI, and UNRATE) please run `collectAllData.m`. For each variable, a data file is created and stored in MATLAB’s `.mat` format. (The resulting `.mat` should be copied into the `matdataKensington` directory for further use by the estimation routines described below.) 
+To process raw data for all variables (RGDP, PGDP, CPI, and UNRATE) please run `collectAllData.m`. For each variable, a data file is created and stored in MATLAB's `.mat` format. (The resulting `.mat` should be copied into the `matdataKensington` directory for further use by the estimation routines described below.) 
 
 In case of updating the data, please adapt the end of the sample in the appropriate scripts as indicated by comments therein (see variable `SPFsamstop` in the script `collectData.m` and its variants). 
 
@@ -88,7 +76,45 @@ Our main estimation routines are contained in `mcmcKensington`.
 
 ### To generate tables and figures
 
-The directory [`tablesandfiguresKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) provides scripts to generate LaTeX tables and figures (as shown in our papers and the appendices). These scripts assume that MCMC results generated by the code in [`mcmcKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) and stored in `.mat` files are stored in a common directory (indicated by the variable `resultsdir` in each script).
+The directory [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) provides scripts to generate LaTeX tables and figures (as shown in our papers and the appendices). These scripts assume that MCMC results generated by the code in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) and stored in `.mat` files are stored in a common directory (indicated by the variable `resultsdir` in each script). The scripts in [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) store their outputs in a newly created subfolder `foo` (by default `foo` is created inside the current working directory; to store outputs in a different directory, please edit the contents of [localtemp.m](https://github.com/elmarmertens/em-matlabbox/tree/master/emtools/localtemp.m) in the `matlabtoolbox` folder of the replication package.
+
+Specifically, the figures shown in our paper are created by the following scripts:
+
+| Tab/Fig | script | output file |
+|---|---|---|
+| Tab.1 | [prettytableZfcst.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/prettytableZfcst.m) | table-ZhatZtp1-slopes-fullsampleSince1990.tex |
+| Tab.2 | [tabulateRelativeEvalstats.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/tabulateRelativeEvalstats.m) | relative-RMSEandCRPS-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-vs-VAR0trendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-fullsampleSince1990.tex |
+| Tab.3 | [prettytableCoverageRates.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/prettytableCoverageRates.m) | table-CoverageRateBands-VAR0trendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-fullsampleSince1990.tex |  
+| Fig.1a | [mcmcKensington/goMDS.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/goMDS.m) | fanchartSEP-RGDP-MDStrendHScycleSV2blockNoiseHS-NgapBOP-samStart1968Q4-2024Q1-thin1-WITHLEGEND.pdf | 
+| Fig.1b | [mcmcKensington/goMDS.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/goMDS.m) | fanchartSEP-UNRATE-MDStrendHScycleSV2blockNoiseHS-NgapBOP-samStart1968Q4-2024Q1-thin1.pdf | 
+| Fig.1c | [mcmcKensington/goMDS.m](https://github.com/elmarmertens/ClarkGanicsMertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/goMDS.m) | fanchartSEP-CPI-MDStrendHScycleSV2blockNoiseHS-NgapBOP-samStart1968Q4-2024Q1-thin1.pdf | 
+| Fig.2a | [figuresFanCharts.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresFanCharts.m) | YpredictivedensitySPF-RGDP-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-2024Q1.pdf | 
+| Fig.2b | [figuresFanCharts.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresFanCharts.m) | YpredictivedensitySPF-UNRATE-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-2024Q1-WITHLEGEND.pdf | 
+| Fig.2c | [figuresFanCharts.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresFanCharts.m) | YpredictivedensitySPF-CPI-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-2024Q1.pdf | 
+| Fig.2d | [figuresFanCharts.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresFanCharts.m) | YpredictivedensitySPF-PGDP-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-2024Q1.pdf | 
+| Fig.3a | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | termstructure-MDS-RGDP-Q1-Until2019Q4-WITHLEGEND.pdf |
+| Fig.3b | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | termstructure-MDS-UNRATE-Q1-Until2019Q4.pdf |
+| Fig.3c | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | termstructure-MDS-CPI-Q1-Until2019Q4.pdf |
+| Fig.3d | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | termstructure-MDS-PGDP-Q1-Until2019Q4.pdf |
+| Fig.4a | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | uncertainty-MDS-RGDP.pdf |
+| Fig.4b | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | uncertainty-MDS-UNRATE.pdf |
+| Fig.4c | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | uncertainty-MDS-CPI-pdf |
+| Fig.4d | [figuresYtermstructures.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresYtermstructures.m) | uncertainty-MDS-PGDP.pdf |
+| Fig.5a |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-RGDP-h4-fullsampleSince1990-y1q4-WITHLEGEND.pdf |
+| Fig.5b |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-UNRATE-h4-fullsampleSince1990-y1q4.pdf |
+| Fig.5c |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-RGDP-h8-fullsampleSince1990-y1q4.pdf |
+| Fig.5d |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-UNRATE-h8-fullsampleSince1990-y1q4.pdf |
+| Fig.5e |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-RGDP-h12-fullsampleSince1990-y1q4.pdf |
+| Fig.5f |  [figuresPITcdf.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresPITcdf.m) | PITs-UNRATE-h12-fullsampleSince1990-y1q4.pdf | 
+| Fig.6a |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh1-RGDP-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4-WITHLEGEND.pdf |
+| Fig.6b |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh1-UNRATE-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6c |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh1-CPI-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6d |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh2-RGDP-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6e |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh2-UNRATE-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6f |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh2-CPI-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6g |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh3-RGDP-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6h |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh3-UNRATE-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
+| Fig.6i |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh3-CPI-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
 
 
-
+Note that, as shown above, the scripts to create Figure 1 can be found in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/); all other scripts to create tables and figures are in  [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington).
