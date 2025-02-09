@@ -210,19 +210,33 @@ for MDSTYPES = {'MDS', 'VAR0'}
 
 
         %% plot selected lines for uncertainty bands
+
+
         Tstop = T;
         Horizons = [0, 1, 4 : 4 : Nhorizons-1];
         hLabel = arrayfun(@(x) sprintf('h=%d', x), Horizons, 'uniformoutput', false);
         thisfig = figure;
         hanni = plot(dates(Tstart:Tstop), band68width(Tstart:Tstop,Horizons+1), 'linewidth', 2);
+        LineStyles = {'-', '-', '--', ':', '-.','-'};
+        Colors     = {'blue', 'orange', 'yellow', 'purple', 'green', 'lightblue'};
+        MarkerStyles = {'d', 'none', 'none', 'none', 'none', 's'};
+        for i = 1:length(hanni)
+            hanni(i).LineStyle = LineStyles{i};
+            hanni(i).Color = colors4plots(Colors{i});
+            if ~strcmpi(MarkerStyles{i}, 'none')
+            hanni(i).Marker = MarkerStyles{i};
+            hanni(i).MarkerSize = 8;
+            hanni(i).LineWidth  = 1;
+            end
+        end
         % xticks(tickDates)
         % xtickdates(dates([Tstart Tstop]), 'keepticks')
         nbershades(dates([Tstart Tstop]), [], [], tickDates)
 
         legend(hanni, hLabel, 'Location','best')
         set(gca, 'fontsize', fontsize)
+        set(gca, 'box', 'off')
         wrapthisfigure(thisfig, sprintf('uncertainty-%s-%s', MDStype, datalabel), wrap);
-
 
     end % datalabels
 

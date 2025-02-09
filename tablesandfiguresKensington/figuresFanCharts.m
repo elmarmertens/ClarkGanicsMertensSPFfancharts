@@ -110,7 +110,9 @@ for MDSTYPES = {'MDS'} % {'MDS', 'VAR0'}
         Tset = transpose(find(ismember(dates, forecastOrigins)));
         colorSPF1 = colors4plots('black');
         colorSPF2 = colors4plots('blue');
-        
+        colorSPF3 = colors4plots('lightblue');
+        colorSPF4 = colors4plots('green');
+
         colorCGM = colors4plots('orange');
 
         for thisT = Tset
@@ -146,11 +148,11 @@ for MDSTYPES = {'MDS'} % {'MDS', 'VAR0'}
                 plot(horizonsB, Zdata(thisT, repmat(ndxB, 1, length(horizonsB))), ':', 'color', colorSPF2, 'linewidth', 4);
             end
             if ndxC <= Nz && ~Znanny(thisT,ndxC)
-                hSPFc = plot(horizonsC, Zdata(thisT, repmat(ndxC, 1, length(horizonsC))), 's', 'color', colorSPF2, 'linewidth', 3, 'MarkerSize', 15);
+                hSPFc = plot(horizonsC, Zdata(thisT, repmat(ndxC, 1, length(horizonsC))), 's', 'color', colorSPF3, 'linewidth', 3, 'MarkerSize', 15);
                 plot(horizonsC, Zdata(thisT, repmat(ndxC, 1, length(horizonsC))), ':', 'color', colorSPF2, 'linewidth', 4);
             end
             if ndxD <= Nz && ~Znanny(thisT,ndxD)
-                hSPFd = plot(horizonsD, Zdata(thisT, repmat(ndxD, 1, length(horizonsD))), 's', 'color', colorSPF2, 'linewidth', 3, 'MarkerSize', 15);
+                hSPFd = plot(horizonsD, Zdata(thisT, repmat(ndxD, 1, length(horizonsD))), 's', 'color', colorSPF4, 'linewidth', 3, 'MarkerSize', 15);
                 plot(horizonsD, Zdata(thisT, repmat(ndxD, 1, length(horizonsD))), ':', 'color', colorSPF2, 'linewidth', 4);
             end
 
@@ -160,8 +162,11 @@ for MDSTYPES = {'MDS'} % {'MDS', 'VAR0'}
             xmax = Nhorizons - 1;
             xticks(0 : 2 : xmax)
             xlim([0 xmax])
+            YLIM = ylim;
+            ylim([YLIM(1) YLIM(2)+2])
             wrapthisfigure(thisfig, sprintf('YpredictivedensitySPF-%s-%s', modellabel, thisDate), wrap, [], [], [], [], true)
-            legend([hDense hSPF hSPFb(1)], 'Predictive Density', 'SPF fixed-horizon data', 'SPF fixed-event data', 'location', 'best');
+            legend([hDense hSPF hSPFb(1) hSPFc(1) hSPFd(1)], 'Predictive Density', 'SPF fixed-horizon data', ...
+                'SPF next-year', 'SPF 2-years ahead', 'SPF 3-years ahead', 'location', 'northwest');
             wrapthisfigure(thisfig, sprintf('YpredictivedensitySPF-%s-%s-WITHLEGEND', modellabel, thisDate), wrap, [], [], [], [], true)
             title(sprintf('%s: %s per %s', MDStype, datalabel, thisDate))
             wrapthisfigure(thisfig, sprintf('YpredictivedensitySPF-%s-%s-WITHLEGENDTITLE', modellabel, thisDate), wrap)
