@@ -1,23 +1,21 @@
-#!/bin/bash
+#!/bin/zsh
 # shell script to launch matlab codes in background
 
-wd=\'`pwd`\'
-preamble='cd '${wd}'; display(pwd), parpool; '
+wd=$(pwd)
+preamble="cd ${wd}; display $wd; parpool"
 # echo $preamble
-
 
 os=$(uname)
 
-if [ $os = Darwin ]
+if [[ $os = Darwin ]]
 then
      alias matlab='~/Applications/MATLAB_R2023b.app/bin/matlab'
      caffeinate -iw $$ &
 fi
 
-for mfile in $@ 
+for mfile in "$@" 
 do
-     thismfile=`basename $mfile .m`
+     thismfile=$(basename "$mfile" .m)
      # echo $thismfile
      matlab -nodisplay -batch "$preamble $thismfile"
 done
-
