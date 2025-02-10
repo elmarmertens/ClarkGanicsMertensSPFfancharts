@@ -39,11 +39,13 @@ For forecast evaluation, we measure the outcomes of GDP growth and GDP inflation
 The replication set includes copies of the raw input files in the folder [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington). Below we also describe code that transforms the input data before further processing by our main estimation routines.
 
 
-### Code
+## Code
 
 All code used for this project was written in MATLAB. The code has been run on various, recent MATLAB versions (Versions 2022a through 2024a) as well as different operating systems (Linux, Windows and macOS) without the need for any particular adjustments across platforms. The code uses MATLAB's Statistics and Machine Learning Toolbox as well as (optionally) the Parallel Computing Toolbox. 
 
 The MATLAB code also creates LaTeX files collecting tables and figures produced by the MATLAB code. If a LaTeX installation is present (and if the `pdflatex` command is available on the command line via MATLAB's "system" command), the LaTeX files will also be compiled into PDF files.
+
+Replication of our results proceeds in three steps that are detailed further below: 1) data preparation, 2) estimation, 3) create tables and figures)
 
 The replication code comes in the following subdirectories: 
 
@@ -55,30 +57,38 @@ The replication code comes in the following subdirectories:
 
 ### To prepare input data files for estimation
 
-The directory `rawdataKensington` contains all of the raw data files obtained from  RTDRC and FRED described above. In addition, the directory contains several `.m` scripts to transform  the raw data input files for further processing by our main estimation routines contained in `mcmcKensington`. All `.m` scripts create `.mat` data files in MATLAB format.
+The directory [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington) contains all of the raw data files obtained from RTDRC and FRED described above. In addition, the directory contains several `.m` scripts to transform the raw data input files for further processing by our main estimation routines contained in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington). All `.m` scripts create `.mat` data files in MATLAB format and stored in [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington).
 
-To process raw data for all variables (RGDP, PGDP, CPI, and UNRATE) please run `collectAllData.m`. For each variable, a data file is created and stored in MATLAB's `.mat` format. (The resulting `.mat` should be copied into the `matdataKensington` directory for further use by the estimation routines described below.) 
+**Replication Step 1:** To process raw data for all variables (RGDP, PGDP, CPI, and UNRATE) please run [`collectAllData.m`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/blob/main/rawdataKensington/collectAllData.m). For each variable, a data file is created and stored in MATLAB's `.mat` format. The resulting `.mat` files should be copied into the [`matdataKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/matdataKensington) directory for further use by the estimation routines described below. These `.mat` files are not provided by this replication package and replicators should run [`collectAllData.m`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/blob/main/rawdataKensington/collectAllData.m) at least once and copy the resulting `*.mat` files from [rawdataKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/rawdataKensington) to [`matdataKensington`](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/matdataKensington).
 
 In case of updating the data, please adapt the end of the sample in the appropriate scripts as indicated by comments therein (see variable `SPFsamstop` in the script `collectData.m` and its variants). 
 
 ### To estimate the models
 
-Our main estimation routines are contained in `mcmcKensington`.
+Our main estimation routines are contained in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington). 
 
-- `kensingtonMDStrendHScycleSVt2blockNoiseHS.m` generates out-of-sample estimates from our MDS model with noise in measurement equations for annual forecasts.
+**Replication Step 2:** To recompute our results, please execute the following programs.
 
-- `kensingtonVAR0trendHScycleSVt2blockNoiseHS.m` generates out-of-sample estimates from our VAR model with noise in measurement equations for annual forecasts.
+- [kensingtonMDStrendHScycleSVt2blockNoiseHS.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/kensingtonMDStrendHScycleSVt2blockNoiseHS.m) generates out-of-sample estimates from our MDS model with noise in measurement equations for annual forecasts.
 
-- `kensingtonMDStrendHScycleSVt2block.m` and `kensingtonVAR0trendHScycleSVt2block.m` generates out-of-sample estimates from the noise-free versions of MDS and VAR models.
+- [kensingtonVAR0trendHScycleSVt2blockNoiseHS.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/kensingtonVAR0trendHScycleSVt2blockNoiseHS.m) generates out-of-sample estimates from our VAR model with noise in measurement equations for annual forecasts.
 
-- Various `go*.m` files allow to estimate MDS and VAR models over a single sample, or to compare output from estimates of two model versions.
+- [kensingtonMDStrendHScycleSVt2block.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/kensingtonMDStrendHScycleSVt2block.m)  and [kensingtonVAR0trendHScycleSVt2block.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/kensingtonVAR0trendHScycleSVt2block.m) generate out-of-sample estimates from the noise-free version of our VAR model.
+
+- [goMDS.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/goMDS.m) generates out-of-sample estimates from our VAR model with noise in measurement equations for annual forecasts.
+
+These scripts store MCMC results as `.mat` files in a newly created subfolder `foo` (by default `foo` is created inside the current working directory, which is [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) when running the scripts above. To create `foo` in a different directory, please edit the contents of [localtemp.m](https://github.com/elmarmertens/em-matlabbox/tree/master/emtools/localtemp.m) in the `matlabtoolbox` folder of the replication package).
+
+Optional: Additional `go*.m` files in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) allow to estimate MDS and VAR models over a single sample, or to compare output from estimates of two model versions.
 
 
 ### To generate tables and figures
 
-The directory [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) provides scripts to generate LaTeX tables and figures (as shown in our paper and its appendix). These scripts assume that MCMC results generated by the code in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington) and stored in `.mat` files are stored in a common directory (indicated by the variable `resultsdir` in each script). The scripts in [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) store their outputs in a newly created subfolder `foo` (by default `foo` is created inside the current working directory; to store outputs in a different directory, please edit the contents of [localtemp.m](https://github.com/elmarmertens/em-matlabbox/tree/master/emtools/localtemp.m) in the `matlabtoolbox` folder of the replication package.
+The directory [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) provides scripts to generate LaTeX tables and figures (as shown in our paper and its appendix). These scripts assume that the `.mat` files with MCMC results generated by the code discussed in the previous section are stored in a common directory (indicated by the variable `resultsdir` in each script); by default, the estimation code discussed above stores results in  `.mat` format in `mcmcKensington/foo`.
 
-Specifically, the figures shown in our paper are created by the following scripts:
+The scripts in [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington) store their outputs (in `*tex` or `*.eps` format) in a newly created subfolder `foo` (by default `foo` is created inside the current working directory. To create `foo` in a different directory, please edit the contents of [localtemp.m](https://github.com/elmarmertens/em-matlabbox/tree/master/emtools/localtemp.m) in the `matlabtoolbox` folder of the replication package).
+
+**Replication Step 3:** To create the figures shown in our paper, run the following scripts and collect their outputs as detailed below:
 
 | Tab/Fig | script | output file |
 |---|---|---|
@@ -117,4 +127,4 @@ Specifically, the figures shown in our paper are created by the following script
 | Fig.6i |  [figuresSEPfanchartsUncertainty.m](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington/figuresSEPfanchartsUncertainty.m) | ERRORBANDsepfancharts-hh3-CPI-MDStrendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4.pdf |
 
 
-Note that, as detailed above, the code to create Figure 1 can be found in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/); all other scripts to create tables and figures are in  [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington).
+Note that the code to create Figure 1 can be found in [mcmcKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/mcmcKensington/); all other scripts to create tables and figures are in  [tablesandfiguresKensington](https://github.com/elmarmertens/ClarkGanicsMertensSPFfancharts/tree/main/tablesandfiguresKensington).
