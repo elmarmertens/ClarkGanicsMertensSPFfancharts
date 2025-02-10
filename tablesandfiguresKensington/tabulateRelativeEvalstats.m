@@ -43,7 +43,7 @@ doMSE = false; % to report relative MSE vs RMSE
 samStartLabel = '1968Q4';
 
 %% set modeldir
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 %% define set of eval windows
 s = 0;
@@ -120,7 +120,6 @@ SAMSTART           = {'1968Q4'};
 % SPFquarterly       = {'-EXy1q4', '-y1q4'};
 % prettySPFquarterly = {'(excl Q4 of y1)','(incl Q4 of y1)'};
 
-% resultdir = '~/prod/kensington-buba/mcmcKensington/matfiles';
 NGAP               = {'BOP'}; 
 MODELTYPES         = {'MDStrendHScycleSVt2blockNoiseHS','VAR0trendHScycleSVt2blockNoiseHS'};
 MODELTYPESpretty   = {'MDS','VAR'};

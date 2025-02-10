@@ -33,7 +33,7 @@ fontsize   = 18;
 
 theseDates = datenum([2019 2023], 10, 1);
 
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 %% define list of models
 NGAP = {'BOP'};

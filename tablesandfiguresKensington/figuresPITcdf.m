@@ -40,7 +40,7 @@ doTitle = false;
 
 samStartLabel = '1968Q4';
 %% set modeldir
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 
 
@@ -59,7 +59,6 @@ SAMSTART = {'1968Q4'};
 SPFquarterly       = {'-EXy1q4', '-y1q4'};
 prettySPFquarterly = {'excl Q4 of y1','incl Q4 of y1'};
 
-% resultdir = '~/prod/kensington-buba/mcmcKensington/matfiles';
 MDStype            = {'MDS', 'VAR0'};
 MDSpretty          = {'MDS', 'VAR'};
 SHOCKtype          = {'trendHScycleSVt2blockNoiseHS'};

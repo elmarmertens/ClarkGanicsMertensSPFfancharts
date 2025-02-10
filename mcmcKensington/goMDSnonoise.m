@@ -1,4 +1,4 @@
-%% MDS vs VAR0 model -- single run for specific thisT
+%% MDS without noise -- single run for specific thisT
 % with constants added to each gap equation
 
 %% load toolboxes

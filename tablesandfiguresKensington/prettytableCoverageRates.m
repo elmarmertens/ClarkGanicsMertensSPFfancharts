@@ -41,7 +41,7 @@ doEXY1Q4 = true;
 
 
 %% set modeldir
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 %% define models
 NGAP               = {'BOP'};

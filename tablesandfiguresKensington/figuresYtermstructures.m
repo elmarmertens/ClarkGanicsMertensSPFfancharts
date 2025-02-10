@@ -31,7 +31,7 @@ clc
 modeltype   = 'trendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4';
 Ndraws      = 3e3;
 
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 
 DATALABELS = {'RGDP', 'UNRATE', 'CPI', 'PGDP'};

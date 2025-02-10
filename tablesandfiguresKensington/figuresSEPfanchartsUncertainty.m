@@ -36,7 +36,7 @@ doTitle    = false;
 modeltype   = 'trendHScycleSVt2blockNoiseHS-y1q4-NgapBOP-samStart1968Q4';
 Ndraws      = 3e3;
 
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 %% process some parameters
 

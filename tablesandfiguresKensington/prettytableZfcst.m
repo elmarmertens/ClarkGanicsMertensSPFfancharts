@@ -31,7 +31,7 @@ clc
 %% parameters
 DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'};
 
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 datadir   = fullfile('..', 'matdataKensington');
 
 for doEXY1Q4 = [false true]

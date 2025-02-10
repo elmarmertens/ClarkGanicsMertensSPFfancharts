@@ -32,7 +32,7 @@ DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'}; % , 'TBILLcensored'};
 fontsize   = 18;
 
 
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 %% define list of models
 % NGAP = {'Ny', 'BOP'};

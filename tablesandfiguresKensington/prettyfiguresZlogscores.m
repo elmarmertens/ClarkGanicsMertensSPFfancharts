@@ -40,7 +40,7 @@ Tstart = 86; % evalstart 1990Q1
 
 samStartLabel = '1968Q4';
 %% set modeldir
-resultdir = '~/jam/lager/kensingtonStateSpaceDraws/';
+resultdir = '../mcmcKensington/foo/';
 
 
 
