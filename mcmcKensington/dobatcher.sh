@@ -16,7 +16,6 @@ foobatch='foodobatch.m'
 rm -f $foobatch
 
 doSamStartSPF=false
-doTBILLcensored=false
 
 doSPFquarterlyOnly=false # note: doSPFquarterlyOnly=true makes choices for doY1Q4 obsolete
 
@@ -32,8 +31,6 @@ echo MCMCdraws=$MCMCdraws
 echo doSamStartSPF=$doSamStartSPF
 echo doSPFquarterlyOnly=$doSPFquarterlyOnly
 
-doTBILLcensored=true
-echo doTBILLcensored=$doTBILLcensored
 
 for samStart in 1; do
 	for doY1Q4 in true false; do
@@ -44,7 +41,7 @@ for samStart in 1; do
 			thismfile=$(basename $mfile .m)
 			# echo doY1Q4=$doY1Q4
 			for NGAP in "BOP"; do                              # "Ny"
-				foofile=foo${thismfile}${NGAP}samStart${samStart} # cens${doTBILLcensored}
+				foofile=foo${thismfile}${NGAP}samStart${samStart} 
 				if [[ "$doY1Q4" = false ]]; then
 					foofile="${foofile}EXy1q4"
 				fi
@@ -69,7 +66,6 @@ for samStart in 1; do
 		doY1Q4='$doY1Q4'; \
 		doSPFquarterlyOnly='$doSPFquarterlyOnly'; \
         doSamStartSPF='$doSamStartSPF'; \
-		doTBILLcensored='$doTBILLcensored'; \
         ' \
 					$mfile >$foofile.m
 

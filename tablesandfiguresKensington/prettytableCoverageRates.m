@@ -29,7 +29,7 @@ clc
 
 %% parameters
 
-DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'}; % , 'TBILLcensored'};
+DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'};
 fontsize   = 18;
 
 

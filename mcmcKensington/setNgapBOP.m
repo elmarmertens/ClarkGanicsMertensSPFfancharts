@@ -12,7 +12,7 @@ if isempty(thisDate)
 end
 
 switch upper(datalabel)
-    case {'RGDP','UNRATE', 'TBILL'}
+    case {'RGDP','UNRATE'}
         if thisDate < datenum(2009,4,1)
             Ngap = 7;
         else

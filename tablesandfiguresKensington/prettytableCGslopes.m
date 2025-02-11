@@ -28,7 +28,7 @@ clc
 
 
 %% parameters
-DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'}; % , 'TBILLcensored'};
+DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'};
 fontsize   = 18;
 
 theseDates = datenum([2019 2023], 10, 1);

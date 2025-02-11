@@ -12,7 +12,7 @@ end
 
 if isempty(thisDate) % full sample choice
     switch upper(datalabel)
-        case {'RGDP','UNRATE', 'TBILL'}
+        case {'RGDP','UNRATE'}
             Ngap = 17;
         case 'PGDP'
             Ngap = 9;
@@ -23,7 +23,7 @@ if isempty(thisDate) % full sample choice
     end
 else % group into two buckets (ignoring pre 1981 simplifications)
     switch upper(datalabel)
-        case {'RGDP','UNRATE', 'TBILL'}
+        case {'RGDP','UNRATE'}
             if thisDate < datenum(2009,4,1)
                 Ngap = 9;
             else

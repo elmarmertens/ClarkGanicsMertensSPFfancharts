@@ -16,7 +16,7 @@ if isempty(thisDate) % full sample choice
             Ngap = 8;
         case 'PGDP'
             Ngap = 6;
-        case {'UNRATE', 'TBILL'}
+        case {'UNRATE'}
             Ngap = 10;
         case 'CPI'
             Ngap = 7;
@@ -33,7 +33,7 @@ else % group into two buckets (ignoring pre 1981 simplifications)
             end
         case 'PGDP'
             Ngap = 6;
-        case {'UNRATE', 'TBILL'}
+        case {'UNRATE'}
             if thisDate < datenum(2009,4,1) 
                 Ngap = 6;
             else

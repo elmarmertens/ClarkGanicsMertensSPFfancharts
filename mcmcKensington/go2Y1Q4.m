@@ -107,7 +107,7 @@ for mtp = MODELTYPES
             if doSamStartSPF
                 samStart   = find(sum(~Znanny,2) > 1,1); % first availability of SPF
             else
-                samStart   = find(any(~Znanny,2),1); % for CPI/TBILL: leaves early sample with only Yrealized ...
+                samStart   = find(any(~Znanny,2),1); % for CPI: leaves early sample with only Yrealized ...
             end
         end
         startDateLabel = datestr(dates(samStart), 'yyyyqq');

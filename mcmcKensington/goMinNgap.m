@@ -33,7 +33,7 @@ rndStream  = getDefaultStream;
 
 quicky     = false; % if TRUE: very short MCMC chains, no looping across variables,
 %  useful for testing code execution, see below for specific settings
-DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI', 'TBILL'};
+DATALABELS = {'RGDP', 'UNRATE', 'PGDP', 'CPI'};
 
 
 % select date
