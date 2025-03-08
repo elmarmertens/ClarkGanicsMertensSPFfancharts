@@ -37,7 +37,7 @@ Nvariables = length(DATALABELS);
 
 Ycode      = 'Y';
 
-doEXY1Q4 = true;
+doEXY1Q4 = false;
 
 
 %% set modeldir

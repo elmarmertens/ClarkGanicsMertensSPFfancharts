@@ -93,7 +93,7 @@ for doEXY1Q4 = [false true]
     wrap   = [];
     titlename = 'prettytableZfcst';
     if doEXY1Q4
-        titlename = strcat(titlename, '-EXY1Q4')
+        titlename = strcat(titlename, '-EXY1Q4');
     end
     initwrap
     if isempty(wrap) && ~isdesktop

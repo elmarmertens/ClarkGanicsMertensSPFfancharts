@@ -163,12 +163,7 @@ for MDStype = {'MDS'} % {'MDS', 'VAR0'}
         end
 
         % set maxNhorizons
-        switch datalabel
-            case {'RGDP', 'UNRATE'}
-                maxAnnualHorizons = 4;
-            case {'CPI'}
-                maxAnnualHorizons = 3;
-        end
+        maxAnnualHorizons = 4;
 
         %% pad extra dates at end
         xdates = genrQdates(year(dates(end)), year(dates(end))+4, 1);
